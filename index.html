@@ -945,20 +945,20 @@
   .pcb-real-image-wrap {
     width: 100%;
     height: 520px;
-    overflow: auto;
+    overflow: hidden;
     background: #070a10;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: grab;
+    padding: 20px;
   }
 
-  .pcb-real-image-wrap:active { cursor: grabbing; }
-
   .pcb-real-image {
-    max-width: none;
-    width: min(100%, 1200px);
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
     height: auto;
+    object-fit: contain;
     display: block;
     border: 1px solid rgba(255,255,255,0.07);
     background: #111;
@@ -1779,24 +1779,6 @@
 
   </div><!-- end pcb-viewer-wrapper -->
 
-  <!-- Feature cards below viewer -->
-  <div class="pcb-features">
-    <div class="pcb-feat reveal">
-      <div class="pcb-feat-icon">◈</div>
-      <div class="pcb-feat-title">2D PCB Layout</div>
-      <div class="pcb-feat-desc">Real board layout image exported from the PCB design and displayed directly in the portfolio for quick visual inspection.</div>
-    </div>
-    <div class="pcb-feat reveal">
-      <div class="pcb-feat-icon">⬡</div>
-      <div class="pcb-feat-title">Interactive 3D Model</div>
-      <div class="pcb-feat-desc">GLB model shown in the browser so visitors can rotate, zoom, and inspect the board without downloading anything.</div>
-    </div>
-    <div class="pcb-feat reveal">
-      <div class="pcb-feat-icon">🛰</div>
-      <div class="pcb-feat-title">Embedded Hardware Portfolio</div>
-      <div class="pcb-feat-desc">Demonstrates PCB design, component placement, hardware integration, and professional presentation for recruiters and engineers.</div>
-    </div>
-  </div>
 </section>
 
 
