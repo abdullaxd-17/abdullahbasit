@@ -743,6 +743,29 @@
   ============================================ */
   #pcb-design { padding-bottom: 80px; }
 
+  .pcb-board-toggle {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
+  }
+
+  .pcb-board-btn {
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 12px 24px;
+    background: var(--surface); color: var(--text-muted);
+    border: 1px solid var(--border);
+    cursor: none; transition: all 0.3s;
+  }
+
+  .pcb-board-btn.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #000; font-weight: 700;
+    border-color: var(--accent);
+  }
+
+  .pcb-board-btn:not(.active):hover {
+    color: var(--accent); border-color: var(--accent);
+  }
+
   .pcb-view-toggle {
     display: flex; gap: 0; margin-bottom: 32px;
     border: 1px solid var(--border); width: fit-content;
@@ -1702,6 +1725,12 @@
     <div class="section-line"></div>
   </div>
 
+  <!-- Board selection tabs -->
+  <div class="pcb-board-toggle reveal">
+    <button class="pcb-board-btn active" id="boardBtnThc" onclick="switchPCBBoard('thc')">THC Board</button>
+    <button class="pcb-board-btn" id="boardBtnSom" onclick="switchPCBBoard('som')">LA_SOM_01-2K25</button>
+  </div>
+
   <!-- Toggle buttons -->
   <div class="pcb-view-toggle reveal">
     <button class="pcb-toggle-btn active" id="btn2d" onclick="switchPCBView('2d')">◈ 2D Layout</button>
@@ -1714,17 +1743,17 @@
     <!-- 2D Panel: real PCB image -->
     <div class="pcb-2d-panel" id="pcb2dPanel">
       <div class="pcb-2d-header">
-        <div class="pcb-2d-label">◈ PCB1_CSUG — 2D PCB LAYOUT VIEW</div>
-        <div class="pcb-2d-info">Real exported PCB image</div>
+        <div class="pcb-2d-label" id="pcb2dLabel">◈ THC BOARD — 2D PCB LAYOUT VIEW</div>
+        <div class="pcb-2d-info" id="pcb2dInfo">Real exported PCB image</div>
       </div>
 
       <div class="pcb-real-image-wrap" id="pcbImageWrap">
-        <img class="pcb-real-image" src="pcb_2d.png" alt="2D PCB layout view designed by Abdullah Basit">
+        <img class="pcb-real-image" id="pcb2dImage" src="pcb_2d.png" alt="2D PCB layout view designed by Abdullah Basit">
       </div>
 
       <div class="pcb-2d-footer">
-        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:1px;">
-          2D PCB Layout · Altium Designer Export · Portfolio Preview
+        <div id="pcb2dFooterText" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:1px;">
+          2D PCB Layout · Altium Designer Export · THC Board Preview
         </div>
         <button class="convert-btn" onclick="convertTo3D()">
           <span>Convert to 3D</span>
@@ -1747,7 +1776,7 @@
     <!-- 3D Panel: real GLB model -->
     <div class="pcb-3d-panel" id="pcb3dPanel">
       <div class="pcb-3d-header">
-        <div class="pcb-3d-label">⬡ PCB1_CSUG.GLB — INTERACTIVE 3D MODEL</div>
+        <div class="pcb-3d-label" id="pcb3dLabel">⬡ THC BOARD.GLB — INTERACTIVE 3D MODEL</div>
         <div class="pcb-3d-controls-hint">🖱 Drag to rotate · Scroll to zoom · Right-drag to pan</div>
       </div>
 
@@ -1767,11 +1796,11 @@
       </model-viewer>
 
       <div class="model-error-note" id="modelErrorNote">
-        GLB file not loaded. Make sure PCB1_csug.glb is uploaded in the same GitHub repo folder as index.html.
+GLB file not loaded. Make sure the selected .glb file is uploaded in the same GitHub repo folder as index.html.
       </div>
 
       <div class="pcb-3d-footer">
-        <div class="pcb-3d-stat">File: <span>PCB1_csug.glb</span></div>
+        <div class="pcb-3d-stat">File: <span id="pcbModelFile">PCB1_csug.glb</span></div>
         <div class="pcb-3d-stat">Format: <span>GLB</span></div>
         <div class="pcb-3d-stat">Viewer: <span>model-viewer</span></div>
       </div>
@@ -1913,6 +1942,68 @@ document.querySelectorAll('.exp-card, .edu-card, .report-card').forEach((card, i
 });
 
 /* ===================== REAL 2D IMAGE → GLB 3D VIEWER ===================== */
+const PCB_BOARDS = {
+  thc: {
+    buttonId: 'boardBtnThc',
+    name: 'THC Board',
+    image: 'pcb_2d.png',
+    model: 'PCB1_csug.glb',
+    layoutLabel: '◈ THC BOARD — 2D PCB LAYOUT VIEW',
+    modelLabel: '⬡ THC BOARD.GLB — INTERACTIVE 3D MODEL',
+    footerText: '2D PCB Layout · Altium Designer Export · THC Board Preview',
+    alt: 'THC board 2D PCB layout view designed by Abdullah Basit'
+  },
+  som: {
+    buttonId: 'boardBtnSom',
+    name: 'LA_SOM_01-2K25',
+    image: 'som_test_board.png',
+    model: 'LA_SOM_01-2K25.glb',
+    layoutLabel: '◈ LA_SOM_01-2K25 — 2D PCB LAYOUT VIEW',
+    modelLabel: '⬡ LA_SOM_01-2K25.GLB — INTERACTIVE 3D MODEL',
+    footerText: '2D PCB Layout · Altium Designer Export · SOM Day Cam Test Board Preview',
+    alt: 'LA SOM 01 2K25 2D PCB layout view designed by Abdullah Basit'
+  }
+};
+
+let currentPCBBoard = 'thc';
+
+function switchPCBBoard(boardId) {
+  const board = PCB_BOARDS[boardId];
+  if (!board) return;
+  currentPCBBoard = boardId;
+
+  document.querySelectorAll('.pcb-board-btn').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(board.buttonId);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  const label2d = document.getElementById('pcb2dLabel');
+  const info2d = document.getElementById('pcb2dInfo');
+  const img2d = document.getElementById('pcb2dImage');
+  const footer2d = document.getElementById('pcb2dFooterText');
+  const label3d = document.getElementById('pcb3dLabel');
+  const viewer = document.getElementById('pcbModelViewer');
+  const fileText = document.getElementById('pcbModelFile');
+  const errorNote = document.getElementById('modelErrorNote');
+
+  if (label2d) label2d.textContent = board.layoutLabel;
+  if (info2d) info2d.textContent = 'Real exported PCB image';
+  if (img2d) {
+    img2d.src = board.image;
+    img2d.alt = board.alt;
+  }
+  if (footer2d) footer2d.textContent = board.footerText;
+  if (label3d) label3d.textContent = board.modelLabel;
+  if (fileText) fileText.textContent = board.model;
+  if (errorNote) errorNote.style.display = 'none';
+  if (viewer) {
+    viewer.setAttribute('src', board.model);
+    viewer.setAttribute('poster', board.image);
+    viewer.setAttribute('alt', 'Interactive 3D model of ' + board.name + ' designed by Abdullah Basit');
+  }
+
+  switchPCBView('2d');
+}
+
 function switchPCBView(view) {
   const btn2d = document.getElementById('btn2d');
   const btn3d = document.getElementById('btn3d');
