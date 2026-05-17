@@ -1729,6 +1729,7 @@
   <div class="pcb-board-toggle reveal">
     <button class="pcb-board-btn active" id="boardBtnThc" onclick="switchPCBBoard('thc')">THC Board</button>
     <button class="pcb-board-btn" id="boardBtnSom" onclick="switchPCBBoard('som')">LA_SOM_01-2K25</button>
+    <button class="pcb-board-btn" id="boardBtnRgbOled" onclick="switchPCBBoard('rgb_oled')">RGB_OLED</button>
   </div>
 
   <!-- Toggle buttons -->
@@ -1965,6 +1966,16 @@ const PCB_BOARDS = {
     modelLabel: '⬡ LA_SOM_01-2K25.GLB — INTERACTIVE 3D MODEL',
     footerText: '2D PCB Layout · Altium Designer Export · SOM Day Cam Test Board Preview',
     alt: 'LA SOM 01 2K25 2D PCB layout view designed by Abdullah Basit'
+  },
+  rgb_oled: {
+    buttonId: 'boardBtnRgbOled',
+    name: 'RGB_OLED',
+    image: 'rgb_oled.png',
+    model: 'RGB_OLED.glb',
+    layoutLabel: '◈ RGB_OLED — 2D PCB LAYOUT VIEW',
+    modelLabel: '⬡ RGB_OLED.GLB — INTERACTIVE 3D MODEL',
+    footerText: '2D PCB Layout · Altium Designer Export · RGB_OLED Board Preview',
+    alt: 'RGB_OLED 2D PCB layout view designed by Abdullah Basit'
   }
 };
 
