@@ -912,6 +912,77 @@
     width: 0%; transition: width 1.4s ease;
   }
 
+  /* PCB features below viewer */
+  .pcb-features {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-top: 24px;
+  }
+
+  .pcb-feat {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 24px 28px;
+    transition: all 0.3s;
+  }
+
+  .pcb-feat:hover { background: var(--surface2); border-color: rgba(0,229,255,0.15); }
+
+  .pcb-feat-icon {
+    font-size: 20px; margin-bottom: 12px;
+  }
+
+  .pcb-feat-title {
+    font-family: 'Syne', sans-serif; font-size: 15px;
+    font-weight: 700; color: var(--text); margin-bottom: 8px;
+  }
+
+  .pcb-feat-desc {
+    font-size: 13px; color: var(--text-muted); line-height: 1.7;
+  }
+
+
+
+  /* REAL PCB IMAGE + GLB VIEWER OVERRIDES */
+  .pcb-real-image-wrap {
+    width: 100%;
+    height: 520px;
+    overflow: auto;
+    background: #070a10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+  }
+
+  .pcb-real-image-wrap:active { cursor: grabbing; }
+
+  .pcb-real-image {
+    max-width: none;
+    width: min(100%, 1200px);
+    height: auto;
+    display: block;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: #111;
+  }
+
+  .pcb-3d-model-viewer {
+    width: 100%;
+    height: 560px;
+    background: radial-gradient(circle at 50% 25%, rgba(0,229,255,0.08), #06080f 58%);
+    border: 0;
+    --poster-color: #06080f;
+  }
+
+  .model-error-note {
+    display: none;
+    padding: 14px 28px;
+    border-top: 1px solid rgba(255,107,53,0.25);
+    color: var(--accent3);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    background: rgba(255,107,53,0.06);
+  }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
@@ -919,7 +990,7 @@
     section { padding: 0 24px; }
     #hero { padding: 80px 24px 60px; }
     .hero-stats { display: none; }
-    .edu-grid, .skills-grid, .contact-wrapper, .reports-grid {
+    .edu-grid, .skills-grid, .contact-wrapper, .reports-grid, .pcb-features {
       grid-template-columns: 1fr;
     }
     footer { padding: 24px; flex-direction: column; gap: 16px; }
@@ -1708,6 +1779,24 @@
 
   </div><!-- end pcb-viewer-wrapper -->
 
+  <!-- Feature cards below viewer -->
+  <div class="pcb-features">
+    <div class="pcb-feat reveal">
+      <div class="pcb-feat-icon">◈</div>
+      <div class="pcb-feat-title">2D PCB Layout</div>
+      <div class="pcb-feat-desc">Real board layout image exported from the PCB design and displayed directly in the portfolio for quick visual inspection.</div>
+    </div>
+    <div class="pcb-feat reveal">
+      <div class="pcb-feat-icon">⬡</div>
+      <div class="pcb-feat-title">Interactive 3D Model</div>
+      <div class="pcb-feat-desc">GLB model shown in the browser so visitors can rotate, zoom, and inspect the board without downloading anything.</div>
+    </div>
+    <div class="pcb-feat reveal">
+      <div class="pcb-feat-icon">🛰</div>
+      <div class="pcb-feat-title">Embedded Hardware Portfolio</div>
+      <div class="pcb-feat-desc">Demonstrates PCB design, component placement, hardware integration, and professional presentation for recruiters and engineers.</div>
+    </div>
+  </div>
 </section>
 
 
@@ -1917,4 +2006,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </script>
 </body>
-</html>
+</html>l>
