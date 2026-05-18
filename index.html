@@ -1862,6 +1862,19 @@
     filter: drop-shadow(0 0 14px rgba(0,229,255,0.38));
   }
 
+  .skill-svg-mark {
+    position: relative;
+    z-index: 2;
+    width: 46px;
+    height: 46px;
+    color: var(--accent);
+    filter: drop-shadow(0 0 14px rgba(0,229,255,0.38));
+  }
+
+  .skill-svg-mark * {
+    vector-effect: non-scaling-stroke;
+  }
+
   .skill-logo-symbol {
     position: relative;
     z-index: 2;
@@ -1908,6 +1921,44 @@
   }
 
   .skill-logo-cube img + .skill-logo-fallback { display: none; }
+
+
+  /* Fail-safe custom mark used when a brand image or Devicon does not load.
+     It is visible first, then hidden only after the real logo/icon is confirmed loaded. */
+  .skill-logo-mark-backup {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .skill-logo-cube.has-logo > img,
+  .skill-logo-cube.has-devicon > i {
+    opacity: 0;
+    transition: opacity .18s ease;
+  }
+
+  .skill-logo-cube.has-logo.logo-loaded > img,
+  .skill-logo-cube.has-devicon.icon-loaded > i {
+    opacity: 1;
+  }
+
+  .skill-logo-cube.has-logo.logo-loaded > .skill-logo-mark-backup,
+  .skill-logo-cube.has-devicon.icon-loaded > .skill-logo-mark-backup {
+    display: none !important;
+  }
+
+  .skill-logo-cube.logo-fallback-active > img,
+  .skill-logo-cube.logo-fallback-active > i {
+    display: none !important;
+  }
+
+  .skill-logo-cube.logo-fallback-active > .skill-logo-mark-backup {
+    display: grid !important;
+  }
 
 
   /* HARD FIX: every missing/broken logo falls back to the same styled symbol cube */
@@ -2122,6 +2173,7 @@
 
   .skill-logo-card:hover .skill-logo-cube img,
   .skill-logo-card:hover .skill-logo-cube i,
+  .skill-logo-card:hover .skill-logo-cube .skill-svg-mark,
   .skill-logo-card:hover .skill-logo-fallback {
     animation: skillLogoFloat 1.8s ease-in-out infinite;
   }
@@ -3418,7 +3470,6 @@ const SKILL_CARD_DATA = [
   { name: 'V-REP / CoppeliaSim', category: 'ai', categoryLabel: 'ROBOTICS', role: 'Robot simulation', logo: '', symbol: 'SIM', fallback: 'VREP', detail: 'Robotics and control simulation for autonomous/wall-follower style projects.' },
   { name: 'LSTM Models', category: 'ai', categoryLabel: 'AI', role: 'Sequence learning', logo: 'https://cdn.simpleicons.org/tensorflow/00E5FF', symbol: 'LSTM', fallback: 'LSTM', detail: 'LSTM-based gesture classification using EEG/EMG signal sequences for BCI applications.' },
  
-  ,
   { name: 'STM32 HAL', category: 'embedded', categoryLabel: 'FW LIB', role: 'Peripheral drivers', logo: 'https://cdn.simpleicons.org/stmicroelectronics/00E5FF', symbol: 'HAL', fallback: 'HAL', detail: 'STM32 HAL-based firmware development for UART, SPI, I2C, GPIO, timers and CAN workflows.' },
   { name: 'CubeProgrammer', category: 'debug', categoryLabel: 'FLASH', role: 'MCU programming', logo: 'https://cdn.simpleicons.org/stmicroelectronics/00E5FF', symbol: 'CP', fallback: 'CP', detail: 'STM32 flashing, firmware loading, bootloader checks and board bring-up support.' },
   { name: 'OpenOCD / GDB', category: 'debug', categoryLabel: 'DEBUG', role: 'Low-level debug', logo: '', symbol: 'DBG', fallback: 'GDB', detail: 'Embedded debug workflow awareness with SWD, breakpoints and low-level firmware inspection.' },
@@ -3431,7 +3482,57 @@ const SKILL_CARD_DATA = [
 
 ];
 
+function skillCustomLogoMark(tool, safeName) {
+  const name = String(tool.name || '').toLowerCase();
+  const category = String(tool.category || '').toLowerCase();
+
+  let type = 'chip';
+  if (name.includes('saturn')) type = 'calculator';
+  else if (name.includes('pcb') || name.includes('fabrication')) type = 'pcb';
+  else if (name.includes('uart') || name.includes('spi') || name.includes('i²c') || name.includes('i2c')) type = 'bus';
+  else if (name.includes('can')) type = 'can';
+  else if (name.includes('lora')) type = 'radio';
+  else if (name.includes('gpio') || name.includes('pwm')) type = 'pwm';
+  else if (name.includes('power') || name.includes('pmic') || name.includes('buck') || name.includes('voltage')) type = 'power';
+  else if (name.includes('adc') || name.includes('dac') || name.includes('instrumentation') || name.includes('analog discovery')) type = 'analog';
+  else if (name.includes('thermal') || name.includes('rtd')) type = 'thermal';
+  else if (name.includes('fpga') || name.includes('spartan') || name.includes('verilog') || name.includes('vhdl') || name.includes('state machine') || name.includes('encoder')) type = 'logic';
+  else if (name.includes('thonny') || name.includes('openocd') || name.includes('gdb')) type = 'debug';
+  else if (name.includes('dsp') || name.includes('bci') || name.includes('i2s') || name.includes('audio')) type = 'signal';
+  else if (name.includes('system-on-module') || name.includes('som')) type = 'som';
+  else if (name.includes('http') || name.includes('model-viewer')) type = 'web3d';
+  else if (name.includes('coppelia') || name.includes('v-rep')) type = 'robot';
+  else if (category === 'protocols') type = 'bus';
+  else if (category === 'power') type = 'power';
+  else if (category === 'fpga') type = 'logic';
+  else if (category === 'ai') type = 'signal';
+
+  const common = `class="skill-svg-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${safeName} logo mark"`;
+  const svg = {
+    pcb: `<svg ${common}><rect x="12" y="14" width="40" height="36" rx="6" stroke="currentColor" stroke-width="3"/><circle cx="23" cy="25" r="3" fill="currentColor"/><circle cx="41" cy="25" r="3" fill="currentColor"/><circle cx="23" cy="39" r="3" fill="currentColor"/><circle cx="41" cy="39" r="3" fill="currentColor"/><path d="M23 25h18M23 39h18M32 25v14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
+    calculator: `<svg ${common}><rect x="14" y="10" width="36" height="44" rx="6" stroke="currentColor" stroke-width="3"/><path d="M22 20h20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="33" r="2.8" fill="currentColor"/><circle cx="32" cy="33" r="2.8" fill="currentColor"/><circle cx="40" cy="33" r="2.8" fill="currentColor"/><circle cx="24" cy="43" r="2.8" fill="currentColor"/><circle cx="32" cy="43" r="2.8" fill="currentColor"/><circle cx="40" cy="43" r="2.8" fill="currentColor"/></svg>`,
+    chip: `<svg ${common}><rect x="18" y="18" width="28" height="28" rx="5" stroke="currentColor" stroke-width="3"/><path d="M25 28h14M25 36h14M12 24h6M12 32h6M12 40h6M46 24h6M46 32h6M46 40h6M24 12v6M32 12v6M40 12v6M24 46v6M32 46v6M40 46v6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
+    som: `<svg ${common}><rect x="12" y="18" width="40" height="28" rx="5" stroke="currentColor" stroke-width="3"/><rect x="23" y="25" width="18" height="14" rx="3" stroke="currentColor" stroke-width="3"/><path d="M18 52v-6M26 52v-6M34 52v-6M42 52v-6M18 18v-6M26 18v-6M34 18v-6M42 18v-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
+    bus: `<svg ${common}><path d="M12 20h40M12 32h40M12 44h40" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="20" cy="20" r="4" fill="currentColor"/><circle cx="44" cy="32" r="4" fill="currentColor"/><circle cx="28" cy="44" r="4" fill="currentColor"/></svg>`,
+    can: `<svg ${common}><path d="M14 22h36M14 42h36" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M22 22v20M42 22v20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="22" cy="22" r="4" fill="currentColor"/><circle cx="42" cy="42" r="4" fill="currentColor"/></svg>`,
+    radio: `<svg ${common}><circle cx="32" cy="34" r="5" fill="currentColor"/><path d="M22 24a15 15 0 0 0 0 20M42 24a15 15 0 0 1 0 20M14 16a27 27 0 0 0 0 36M50 16a27 27 0 0 1 0 36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
+    pwm: `<svg ${common}><path d="M10 42h8V22h10v20h10V22h8v20h8" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    power: `<svg ${common}><path d="M35 8 17 36h14l-4 20 20-30H33l2-18Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round" fill="rgba(0,229,255,0.12)"/></svg>`,
+    analog: `<svg ${common}><path d="M10 40c8 0 8-16 16-16s8 16 16 16 8-16 12-16" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M12 50h40M32 12v40" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.65"/></svg>`,
+    thermal: `<svg ${common}><path d="M30 14a6 6 0 0 1 12 0v22a13 13 0 1 1-12 0V14Z" stroke="currentColor" stroke-width="3"/><path d="M36 20v22" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="36" cy="46" r="5" fill="currentColor"/></svg>`,
+    logic: `<svg ${common}><rect x="12" y="14" width="40" height="36" rx="6" stroke="currentColor" stroke-width="3"/><path d="M20 25h8l6 14h10M20 39h8l6-14h10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    debug: `<svg ${common}><path d="M22 18h20v10H22z" stroke="currentColor" stroke-width="3"/><path d="M18 34h28v16H18zM26 28v6M38 28v6M24 50v6M40 50v6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="26" cy="42" r="2.5" fill="currentColor"/><circle cx="38" cy="42" r="2.5" fill="currentColor"/></svg>`,
+    signal: `<svg ${common}><path d="M8 38h10l6-18 10 32 8-24 5 10h9" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    web3d: `<svg ${common}><path d="M18 20 8 32l10 12M46 20l10 12-10 12" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 48 36 16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M32 26 42 32l-10 6-10-6 10-6Z" fill="rgba(0,229,255,0.15)" stroke="currentColor" stroke-width="2.5"/></svg>`,
+    robot: `<svg ${common}><rect x="16" y="22" width="32" height="24" rx="6" stroke="currentColor" stroke-width="3"/><path d="M32 22v-8M24 50h16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="25" cy="34" r="3" fill="currentColor"/><circle cx="39" cy="34" r="3" fill="currentColor"/></svg>`
+  };
+
+  return svg[type] || svg.chip;
+}
+
 function skillLogoHtml(tool) {
+  if (!tool || !tool.name) return '';
+
   const escapeHtml = value => String(value)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -3440,29 +3541,40 @@ function skillLogoHtml(tool) {
     .replace(/'/g, '&#039;');
 
   const safeName = escapeHtml(tool.name);
-  const safeCategory = escapeHtml(tool.category);
-  const safeCategoryLabel = escapeHtml(tool.categoryLabel);
-  const safeRole = escapeHtml(tool.role);
-  const fallback = tool.fallback || tool.name.slice(0, 3).toUpperCase();
-  const safeFallback = escapeHtml(fallback);
-  const symbol = tool.symbol || fallback;
-  const safeSymbol = escapeHtml(symbol);
-  const symbolClass = String(symbol).length > 3 ? 'skill-logo-symbol long-symbol' : 'skill-logo-symbol';
-  const symbolMarkup = `<span class="${symbolClass}" aria-label="${safeName} symbol">${safeSymbol}</span>`;
+  const safeCategory = escapeHtml(tool.category || 'all');
+  const safeCategoryLabel = escapeHtml(tool.categoryLabel || 'SKILL');
+  const safeRole = escapeHtml(tool.role || 'Engineering skill');
+  const safeIcon = tool.icon ? escapeHtml(tool.icon) : '';
+  const customMark = skillCustomLogoMark(tool, safeName);
 
-  // Every skill now has a visible symbol fallback. If an external logo breaks,
-  // the same styled symbol appears automatically instead of a blank cube.
-  let logoContent = symbolMarkup;
+  // Display priority:
+  // 1) original brand/simpleicons image when available
+  // 2) original Devicon class when available
+  // 3) custom inline SVG mark for everything else
+  // A custom SVG backup is visible until the real logo/icon is confirmed loaded,
+  // so no cube can appear empty.
+  let logoContent = customMark;
+  let cubeClass = 'skill-logo-cube';
 
   if (tool.logo) {
-    logoContent = `<img src="${tool.logo}" alt="${safeName} logo" loading="lazy"><span class="${symbolClass} logo-backup-symbol" aria-label="${safeName} symbol" style="display:none">${safeSymbol}</span><span class="skill-logo-fallback" style="display:none">${safeFallback}</span>`;
+    cubeClass += ' has-logo';
+    logoContent = `
+      <span class="skill-logo-mark-backup" aria-hidden="true">${customMark}</span>
+      <img src="${escapeHtml(tool.logo)}" alt="${safeName} logo" loading="lazy">
+    `;
+  } else if (tool.icon) {
+    cubeClass += ' has-devicon';
+    logoContent = `
+      <span class="skill-logo-mark-backup" aria-hidden="true">${customMark}</span>
+      <i class="${safeIcon}" aria-hidden="true"></i>
+    `;
   }
 
   return `
     <article class="skill-logo-card" data-skill-card data-category="${safeCategory}" data-category-label="${safeCategoryLabel}">
       <div class="skill-logo-face">
         <div class="skill-category-label">${safeCategoryLabel}</div>
-        <div class="skill-logo-cube">${logoContent}</div>
+        <div class="${cubeClass}">${logoContent}</div>
         <div class="skill-logo-title">${safeName}</div>
         <div class="skill-logo-role">${safeRole}</div>
       </div>
@@ -3487,18 +3599,54 @@ function applySkillFilter(categoryId) {
 }
 
 function wireSkillLogos(scope = document) {
+  const useBackup = cube => {
+    if (!cube) return;
+    cube.classList.remove('logo-loaded', 'icon-loaded');
+    cube.classList.add('logo-fallback-active');
+  };
+
+  const useLoadedLogo = cube => {
+    if (!cube) return;
+    cube.classList.remove('logo-fallback-active');
+    cube.classList.add('logo-loaded');
+  };
+
+  const useLoadedIcon = cube => {
+    if (!cube) return;
+    cube.classList.remove('logo-fallback-active');
+    cube.classList.add('icon-loaded');
+  };
+
   scope.querySelectorAll('.skill-logo-cube img').forEach(img => {
-    img.addEventListener('error', function () {
-      const backupSymbol = this.parentElement.querySelector('.logo-backup-symbol');
-      const fallback = this.parentElement.querySelector('.skill-logo-fallback');
-      this.style.display = 'none';
-      if (backupSymbol) {
-        backupSymbol.style.display = 'grid';
-      } else if (fallback) {
-        fallback.style.display = 'grid';
-      }
+    img.addEventListener('load', function () {
+      if (this.naturalWidth > 0) useLoadedLogo(this.closest('.skill-logo-cube'));
     }, { once: true });
+
+    img.addEventListener('error', function () {
+      useBackup(this.closest('.skill-logo-cube'));
+    }, { once: true });
+
+    // Handles cached images immediately.
+    if (img.complete) {
+      if (img.naturalWidth > 0) useLoadedLogo(img.closest('.skill-logo-cube'));
+      else useBackup(img.closest('.skill-logo-cube'));
+    }
   });
+
+  const checkDevicons = () => {
+    scope.querySelectorAll('.skill-logo-cube i[class*="devicon-"]').forEach(icon => {
+      const before = window.getComputedStyle(icon, '::before').getPropertyValue('content');
+      const missingPseudo = !before || before === 'none' || before === 'normal' || before === '""';
+      if (missingPseudo) {
+        useBackup(icon.closest('.skill-logo-cube'));
+      } else {
+        useLoadedIcon(icon.closest('.skill-logo-cube'));
+      }
+    });
+  };
+
+  requestAnimationFrame(checkDevicons);
+  window.addEventListener('load', checkDevicons, { once: true });
 }
 
 function initInteractiveToolStack() {
@@ -3510,7 +3658,7 @@ function initInteractiveToolStack() {
     <button class="skill-filter-btn ${cat.id === 'all' ? 'active' : ''}" data-category="${cat.id}" type="button"><span>${cat.label}</span></button>
   `).join('');
 
-  grid.innerHTML = SKILL_CARD_DATA.map(skillLogoHtml).join('');
+  grid.innerHTML = SKILL_CARD_DATA.filter(Boolean).map(skillLogoHtml).join('');
   wireSkillLogos(grid);
 
   filters.querySelectorAll('.skill-filter-btn').forEach(btn => {
