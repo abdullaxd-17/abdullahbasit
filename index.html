@@ -2346,6 +2346,177 @@
     box-shadow: 0 22px 52px rgba(0,229,255,0.16) !important;
   }
 
+
+
+  /* =====================================================
+     FINAL CARD + ICON TEXT FIT FIX
+     Fixes long skill names/roles so they stay inside each card
+     and do not collide with the logo/icon cube.
+     Nothing else in the page is changed.
+  ===================================================== */
+  #skills .skill-card-grid {
+    grid-template-columns: repeat(6, minmax(142px, 1fr)) !important;
+    align-items: stretch !important;
+  }
+
+  #skills .skill-logo-card {
+    min-height: 214px !important;
+    height: 100% !important;
+    padding: 18px 9px 14px !important;
+    overflow: hidden !important;
+    contain: paint !important;
+  }
+
+  #skills .skill-logo-face {
+    width: 100% !important;
+    height: 100% !important;
+    display: grid !important;
+    grid-template-rows: 18px 74px 44px 34px !important;
+    align-items: center !important;
+    justify-items: center !important;
+    gap: 7px !important;
+    transform: translateZ(24px) !important;
+  }
+
+  #skills .skill-category-label {
+    width: 100% !important;
+    max-width: 130px !important;
+    height: 18px !important;
+    min-height: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 8.2px !important;
+    line-height: 1 !important;
+    letter-spacing: 1.25px !important;
+  }
+
+  #skills .skill-logo-cube {
+    width: 70px !important;
+    height: 70px !important;
+    min-width: 70px !important;
+    min-height: 70px !important;
+    max-width: 70px !important;
+    max-height: 70px !important;
+    border-radius: 21px !important;
+    overflow: hidden !important;
+    display: grid !important;
+    place-items: center !important;
+    align-self: center !important;
+    justify-self: center !important;
+  }
+
+  #skills .skill-logo-cube img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 52px !important;
+    max-height: 52px !important;
+    object-fit: contain !important;
+  }
+
+  #skills .skill-logo-cube .skill-svg-mark {
+    width: 45px !important;
+    height: 45px !important;
+    max-width: 45px !important;
+    max-height: 45px !important;
+  }
+
+  #skills .skill-logo-cube i {
+    font-size: 38px !important;
+    line-height: 1 !important;
+  }
+
+  #skills .skill-logo-title {
+    width: 100% !important;
+    max-width: 134px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+    margin: 0 !important;
+    padding: 0 2px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    overflow: hidden !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    hyphens: auto !important;
+    font-size: 13.4px !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.35px !important;
+    transform: none !important;
+    text-wrap: balance !important;
+  }
+
+  #skills .skill-logo-title.fit-long-title {
+    font-size: 11.4px !important;
+    line-height: 1.03 !important;
+    letter-spacing: -0.45px !important;
+  }
+
+  #skills .skill-logo-title.fit-extra-long-title {
+    font-size: 9.6px !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.55px !important;
+    max-width: 138px !important;
+  }
+
+  #skills .skill-logo-role {
+    width: 100% !important;
+    max-width: 136px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
+    margin: 0 !important;
+    padding: 0 2px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    overflow: hidden !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    font-size: 8.1px !important;
+    line-height: 1.18 !important;
+    letter-spacing: 0.72px !important;
+    transform: none !important;
+  }
+
+  #skills .skill-logo-role.fit-long-role {
+    font-size: 7.25px !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0.45px !important;
+  }
+
+  /* Extra protection for very long names so they never escape the frame. */
+  #skills .skill-logo-title.text-fit-applied,
+  #skills .skill-logo-role.text-fit-applied {
+    box-sizing: border-box !important;
+  }
+
+  @media (max-width: 1100px) {
+    #skills .skill-card-grid { grid-template-columns: repeat(4, minmax(142px, 1fr)) !important; }
+  }
+
+  @media (max-width: 760px) {
+    #skills .skill-card-grid { grid-template-columns: repeat(2, minmax(138px, 1fr)) !important; gap: 12px !important; }
+    #skills .skill-logo-card { min-height: 210px !important; }
+    #skills .skill-logo-title { max-width: 150px !important; }
+    #skills .skill-logo-role { max-width: 150px !important; }
+  }
+
+  @media (max-width: 420px) {
+    #skills .skill-card-grid { grid-template-columns: 1fr !important; }
+    #skills .skill-logo-card { min-height: 200px !important; }
+  }
+
 </style>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
@@ -3755,6 +3926,36 @@ function wireSkillLogos(scope = document) {
   window.addEventListener('load', checkDevicons, { once: true });
 }
 
+
+
+function fitSkillTextToCards(scope = document) {
+  const fitOne = (el, maxSize, minSize) => {
+    if (!el) return;
+    el.classList.add('text-fit-applied');
+    el.style.fontSize = maxSize + 'px';
+    el.style.lineHeight = el.classList.contains('skill-logo-role') ? '1.15' : '1.02';
+
+    let size = maxSize;
+    // Reduce until the text fits inside its fixed frame.
+    while (size > minSize && (el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1)) {
+      size -= 0.35;
+      el.style.fontSize = size.toFixed(2) + 'px';
+    }
+  };
+
+  scope.querySelectorAll('#skills .skill-logo-title').forEach(el => {
+    const txt = (el.textContent || '').trim();
+    const max = txt.length >= 24 ? 10.2 : txt.length >= 16 ? 12.0 : 13.4;
+    fitOne(el, max, 7.2);
+  });
+
+  scope.querySelectorAll('#skills .skill-logo-role').forEach(el => {
+    const txt = (el.textContent || '').trim();
+    const max = txt.length >= 22 ? 7.8 : 8.2;
+    fitOne(el, max, 6.2);
+  });
+}
+
 function initInteractiveToolStack() {
   const filters = document.getElementById('skillFilterRow');
   const grid = document.getElementById('skillCardGrid');
@@ -3766,9 +3967,10 @@ function initInteractiveToolStack() {
 
   grid.innerHTML = SKILL_CARD_DATA.filter(Boolean).map(skillLogoHtml).join('');
   wireSkillLogos(grid);
+  requestAnimationFrame(() => fitSkillTextToCards(grid));
 
   filters.querySelectorAll('.skill-filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => applySkillFilter(btn.dataset.category));
+    btn.addEventListener('click', () => { applySkillFilter(btn.dataset.category); requestAnimationFrame(() => fitSkillTextToCards(grid)); });
   });
 
   grid.querySelectorAll('[data-skill-card]').forEach((card, index) => {
@@ -3807,6 +4009,8 @@ function initInteractiveToolStack() {
 }
 
 window.addEventListener('DOMContentLoaded', initInteractiveToolStack);
+window.addEventListener('load', () => fitSkillTextToCards(document));
+window.addEventListener('resize', () => fitSkillTextToCards(document));
 
 
 </script>
