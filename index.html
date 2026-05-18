@@ -3365,10 +3365,7 @@ const SKILL_CARD_DATA = [
   { name: 'GStreamer', category: 'programming', categoryLabel: 'VIDEO', role: 'Video pipeline', logo: 'https://cdn.simpleicons.org/gstreamer/00E5FF', fallback: 'GST', detail: 'Real-time video pipeline work and overlay-oriented embedded Linux application experience.' },
   { name: 'DeepStream SDK', category: 'programming', categoryLabel: 'NVIDIA', role: 'Video analytics', logo: 'https://cdn.simpleicons.org/nvidia/00E5FF', fallback: 'DS', detail: 'NVIDIA video-processing SDK exposure for real-time embedded vision applications.' },
 
-  { name: 'Gerber / NC Drill', category: 'pcb', categoryLabel: 'FAB', role: 'Manufacturing files', logo: '', fallback: 'GBR', detail: 'Gerber generation, NC drill exports, layer review and board manufacturing preparation.' },
-  { name: 'Differential Pairs', category: 'pcb', categoryLabel: 'SI', role: 'High-speed routing', logo: '', fallback: 'DIFF', detail: 'CAN and high-frequency routing awareness with pair spacing, impedance and return-path control.' },
-  { name: 'STEP / GLB 3D', category: 'pcb', categoryLabel: '3D', role: 'PCB visualization', logo: '', fallback: '3D', detail: 'Exporting PCB 3D models from CAD workflows and using GLB for portfolio visualization.' },
-  { name: 'JLCPCB / DFM', category: 'pcb', categoryLabel: 'DFM', role: 'Manufacturing review', logo: '', fallback: 'DFM', detail: 'PCB capability checks, minimum trace/clearance, hole sizes, silkscreen spacing and fabrication readiness.' },
+
 
   { name: 'HTTP Server', category: 'protocols', categoryLabel: 'WEB IOT', role: 'Embedded web interface', logo: '', fallback: 'HTTP', detail: 'Raspberry Pi Pico W and IoT-style embedded server experiments for monitoring/control.' },
   { name: 'ESP-Mesh', category: 'protocols', categoryLabel: 'MESH', role: 'Wireless network', logo: 'https://cdn.simpleicons.org/espressif/00E5FF', fallback: 'MESH', detail: 'Distributed ESP32 wireless communication and IoT node networking concepts.' },
@@ -3383,36 +3380,19 @@ const SKILL_CARD_DATA = [
   { name: 'Finite State Machines', category: 'fpga', categoryLabel: 'DIGITAL', role: 'Control logic', logo: '', fallback: 'FSM', detail: 'FSM-based digital control, counters, timing logic and hardware state sequencing.' },
   { name: 'Quadrature Encoder', category: 'fpga', categoryLabel: 'DIGITAL', role: 'Motor feedback', logo: '', fallback: 'ENC', detail: 'Digital logic projects involving encoder reading, motor control and FPGA-based interfaces.' },
 
-  { name: 'Oscilloscope', category: 'debug', categoryLabel: 'LAB', role: 'Measurement', logo: '', fallback: 'OSC', detail: 'Signal probing, waveform checks, PWM validation, bring-up measurements and hardware debugging.' },
-  { name: 'Logic Analyzer', category: 'debug', categoryLabel: 'LAB', role: 'Digital bus debug', logo: '', fallback: 'LA', detail: 'UART, SPI, I2C and digital timing checks during firmware and board validation.' },
-  { name: 'ST-Link / SWD', category: 'debug', categoryLabel: 'DEBUG', role: 'STM32 flashing', logo: 'https://cdn.simpleicons.org/stmicroelectronics/00E5FF', fallback: 'SWD', detail: 'STM32 flashing, debugging, breakpoint workflow and board bring-up through SWD/ST-Link.' },
-  { name: 'Serial Monitor / PuTTY', category: 'debug', categoryLabel: 'DEBUG', role: 'UART testing', logo: '', fallback: 'COM', detail: 'Serial terminal debugging, UART frame inspection and embedded communication testing.' },
-  { name: 'Multimeter / Bench Test', category: 'debug', categoryLabel: 'LAB', role: 'Electrical checks', logo: '', fallback: 'DMM', detail: 'Continuity checks, voltage rail validation, current measurement and practical lab debugging.' },
-
+ 
+  
   { name: 'V-REP / CoppeliaSim', category: 'ai', categoryLabel: 'ROBOTICS', role: 'Robot simulation', logo: '', fallback: 'VREP', detail: 'Robotics and control simulation for autonomous/wall-follower style projects.' },
   { name: 'LSTM Models', category: 'ai', categoryLabel: 'AI', role: 'Sequence learning', logo: 'https://cdn.simpleicons.org/tensorflow/00E5FF', fallback: 'LSTM', detail: 'LSTM-based gesture classification using EEG/EMG signal sequences for BCI applications.' },
-  { name: 'Feature Extraction', category: 'ai', categoryLabel: 'SIGNAL', role: 'ML features', logo: '', fallback: 'FE', detail: 'Time/frequency-domain features, preprocessing and classification pipeline preparation.' },
-  { name: 'EEG / EMG / ECG', category: 'ai', categoryLabel: 'BIOMED', role: 'Biopotential signals', logo: '', fallback: 'EEG', detail: 'Low-amplitude biomedical signals, analog front-end acquisition and signal processing.' }
-
+ 
   ,
   { name: 'STM32 HAL', category: 'embedded', categoryLabel: 'FW LIB', role: 'Peripheral drivers', logo: 'https://cdn.simpleicons.org/stmicroelectronics/00E5FF', fallback: 'HAL', detail: 'STM32 HAL-based firmware development for UART, SPI, I2C, GPIO, timers and CAN workflows.' },
   { name: 'CubeProgrammer', category: 'debug', categoryLabel: 'FLASH', role: 'MCU programming', logo: 'https://cdn.simpleicons.org/stmicroelectronics/00E5FF', fallback: 'CP', detail: 'STM32 flashing, firmware loading, bootloader checks and board bring-up support.' },
   { name: 'OpenOCD / GDB', category: 'debug', categoryLabel: 'DEBUG', role: 'Low-level debug', logo: '', fallback: 'GDB', detail: 'Embedded debug workflow awareness with SWD, breakpoints and low-level firmware inspection.' },
-  { name: 'Saleae Logic', category: 'debug', categoryLabel: 'LAB', role: 'Protocol capture', logo: '', fallback: 'SALE', detail: 'Logic analysis workflow for UART, SPI, I2C and digital timing verification.' },
   { name: 'Analog Discovery', category: 'debug', categoryLabel: 'LAB', role: 'Mixed-signal test', logo: '', fallback: 'AD2', detail: 'Portable scope, logic analyzer and waveform workflow for electronics testing.' },
-  { name: 'JTAG / SWD', category: 'debug', categoryLabel: 'DEBUG', role: 'Hardware debug port', logo: '', fallback: 'JTAG', detail: 'MCU and FPGA debug interface awareness for flashing, probing and validation.' },
-  { name: 'Oscilloscope Probing', category: 'debug', categoryLabel: 'LAB', role: 'Signal measurement', logo: '', fallback: 'PROBE', detail: 'Practical probing of clocks, PWM, serial lines, analog signals and power rails.' },
-  { name: 'DFM / DRC Review', category: 'pcb', categoryLabel: 'PCB QA', role: 'Manufacturing check', logo: '', fallback: 'DRC', detail: 'Clearance, width, hole size, annular ring, solder mask, silkscreen and fabrication checks.' },
-  { name: 'Gerber X2', category: 'pcb', categoryLabel: 'FAB', role: 'PCB output', logo: '', fallback: 'GX2', detail: 'Advanced PCB manufacturing output flow with layer and drill documentation.' },
-  { name: '3D STEP Export', category: 'pcb', categoryLabel: 'MCAD', role: 'Board 3D model', logo: '', fallback: 'STEP', detail: 'PCB mechanical export for CAD review, conversion to GLB and portfolio 3D visualization.' },
-  { name: 'Power Planes', category: 'pcb', categoryLabel: 'LAYOUT', role: 'PDN layout', logo: '', fallback: 'PDN', detail: 'Power distribution, ground returns, copper pours, decoupling and plane strategy.' },
-  { name: 'Grounding Strategy', category: 'pcb', categoryLabel: 'LAYOUT', role: 'Noise control', logo: '', fallback: 'GND', detail: 'Analog/digital grounding, return paths, star points and noise-aware PCB layout.' },
-  { name: 'Decoupling Networks', category: 'power', categoryLabel: 'PDN', role: 'Supply stability', logo: '', fallback: 'CAP', detail: 'Local bypassing, bulk capacitance and regulator stability practices.' },
   { name: 'Buck Converters', category: 'power', categoryLabel: 'POWER', role: 'DC/DC design', logo: 'https://cdn.simpleicons.org/texasinstruments/00E5FF', fallback: 'BUCK', detail: 'Switching regulator selection, layout and power-stage considerations.' },
   { name: 'CAN Transceivers', category: 'protocols', categoryLabel: 'BUS PHY', role: 'CAN hardware', logo: '', fallback: 'CAN', detail: 'CANH/CANL bus hardware, transceivers, termination and ESD-aware connection.' },
   { name: 'LoRaWAN Concepts', category: 'protocols', categoryLabel: 'LORA', role: 'Long-range IoT', logo: '', fallback: 'LORA', detail: 'LoRa radio link understanding for telemetry and embedded communication systems.' },
-  { name: 'PCBWay / JLCPCB', category: 'pcb', categoryLabel: 'FAB', role: 'PCB manufacturer flow', logo: '', fallback: 'FAB', detail: 'Manufacturer capability review, ordering package preparation and fabrication checks.' },
-  { name: 'Fusion / FreeCAD', category: 'pcb', categoryLabel: '3D CAD', role: 'STEP conversion', logo: '', fallback: 'CAD', detail: 'STEP-to-mesh conversion workflow for Blender/GLB web visualization.' },
   { name: 'Blender', category: 'pcb', categoryLabel: '3D WEB', role: 'GLB optimization', logo: 'https://cdn.simpleicons.org/blender/00E5FF', fallback: 'BL', detail: 'Model preparation and GLB export for interactive website PCB viewing.' },
   { name: 'model-viewer', category: 'programming', categoryLabel: 'WEB 3D', role: '3D web viewer', logo: '', fallback: 'MV', detail: 'Interactive GLB display in HTML portfolio pages.' }
 
