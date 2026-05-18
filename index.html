@@ -3281,7 +3281,6 @@ const SKILL_CARD_DATA = [
   { name: 'SolidWorks', category: 'pcb', categoryLabel: 'MCAD', role: 'Mechanical 3D checking', logo: 'https://cdn.simpleicons.org/dassaultsystemes/00E5FF', fallback: 'SW', detail: 'Mechanical fit checks, enclosure awareness, 3D board review and STEP/assembly workflow.' },
   { name: 'KiCad', category: 'pcb', categoryLabel: 'ECAD', role: 'PCB file references', logo: 'https://cdn.simpleicons.org/kicad/00E5FF', fallback: 'KICAD', detail: 'Used for reference designs, file conversion awareness and open-source PCB project study.' },
   { name: 'PCB Fabrication', category: 'pcb', categoryLabel: 'DFM', role: 'Board manufacturing', logo: '', fallback: 'PCB', detail: 'PCB fabrication, SMD assembly, soldering, inspection, hardware testing and manufacturability review.' },
-  { name: 'Signal Integrity', category: 'pcb', categoryLabel: 'LAYOUT', role: 'Routing optimization', logo: '', fallback: 'SI', detail: 'Differential pairs, return paths, grounding, decoupling, high-frequency layout and noise-aware routing.' },
 
   // Embedded
   { name: 'STM32', category: 'embedded', categoryLabel: 'MCU', role: 'Microcontroller systems', logo: 'https://cdn.simpleicons.org/stmicroelectronics/00E5FF', fallback: 'ST', detail: 'STM32 boards, firmware bring-up, HAL, sensors, control systems and embedded communication interfaces.' },
@@ -3298,7 +3297,6 @@ const SKILL_CARD_DATA = [
   { name: 'C++', category: 'programming', categoryLabel: 'FW', role: 'Embedded / systems code', logo: '', icon: 'devicon-cplusplus-plain', fallback: 'C++', detail: 'Embedded applications, hardware abstraction, testing utilities, DeepStream/GStreamer style system code.' },
   { name: 'Python', category: 'programming', categoryLabel: 'SCRIPT', role: 'Automation + analysis', logo: '', icon: 'devicon-python-plain', fallback: 'PY', detail: 'Signal processing, data analysis, automation, BCI preprocessing and engineering scripts.' },
   { name: 'MicroPython', category: 'programming', categoryLabel: 'SCRIPT', role: 'Pico / IoT firmware', logo: 'https://cdn.simpleicons.org/python/00E5FF', fallback: 'µPY', detail: 'Rapid firmware development on Raspberry Pi Pico and embedded sensor prototypes.' },
-  { name: 'Assembly', category: 'programming', categoryLabel: 'LOW LEVEL', role: 'Processor basics', logo: '', fallback: 'ASM', detail: 'Low-level programming concepts used in microprocessor and digital systems coursework.' },
   { name: 'Git', category: 'programming', categoryLabel: 'VCS', role: 'Version control', logo: 'https://cdn.simpleicons.org/git/00E5FF', fallback: 'GIT', detail: 'Repository workflow, commits, branching and code/project tracking.' },
   { name: 'GitHub', category: 'programming', categoryLabel: 'PORTFOLIO', role: 'Project hosting', logo: 'https://cdn.simpleicons.org/github/00E5FF', fallback: 'GH', detail: 'Project hosting, portfolio deployment, source control and technical documentation.' },
 
@@ -3323,7 +3321,6 @@ const SKILL_CARD_DATA = [
 
   // Power / DAQ
   { name: 'Power Management', category: 'power', categoryLabel: 'POWER', role: 'Converters + regulators', logo: '', fallback: 'PWR', detail: 'Buck-boost converters, PMICs, regulators, detector supplies and embedded power rails.' },
-  { name: 'Texas Instruments', category: 'power', categoryLabel: 'POWER IC', role: 'LM515x / LM745', logo: 'https://cdn.simpleicons.org/texasinstruments/00E5FF', fallback: 'TI', detail: 'LM5155, LM5156, LM5157, LM5158 and LM745-based power management circuit work.' },
   { name: 'Analog Devices', category: 'power', categoryLabel: 'MIXED-SIGNAL', role: 'ADC / analog ICs', logo: 'https://cdn.simpleicons.org/analogdevices/00E5FF', fallback: 'ADI', detail: 'ADC, DAC, instrumentation, analog circuitry and mixed-signal sensor acquisition support.' },
   { name: 'ADC / DAC', category: 'power', categoryLabel: 'DATA CONV', role: 'Data conversion', logo: '', fallback: 'ADC', detail: 'ADC, DAC and mixed-signal IC integration with SoM platforms and sensor acquisition.' },
   { name: 'PMICs', category: 'power', categoryLabel: 'POWER', role: 'Power rails', logo: '', fallback: 'PMIC', detail: 'Power management IC integration, rails, sequencing, decoupling and embedded supply design.' },
@@ -3340,10 +3337,8 @@ const SKILL_CARD_DATA = [
   { name: 'Keil µVision', category: 'debug', categoryLabel: 'IDE', role: 'Embedded C IDE', logo: 'https://cdn.simpleicons.org/arm/00E5FF', fallback: 'KEIL', detail: 'Embedded C development and microcontroller firmware workflows.' },
   { name: 'Thonny', category: 'debug', categoryLabel: 'IDE', role: 'MicroPython IDE', logo: '', fallback: 'TH', detail: 'MicroPython development and fast prototyping on Pico/embedded platforms.' },
   { name: 'MPLAB IDE', category: 'debug', categoryLabel: 'IDE', role: 'PIC development', logo: 'https://cdn.simpleicons.org/microchip/00E5FF', fallback: 'MPLAB', detail: 'PIC firmware development and Microchip embedded workflow.' },
-  { name: 'Hardware Debugging', category: 'debug', categoryLabel: 'LAB', role: 'Bring-up + validation', logo: '', fallback: 'DBG', detail: 'Board bring-up, fault tracing, oscilloscope/measurement workflow, noise checks and hardware validation.' },
-  { name: 'Soldering / Assembly', category: 'debug', categoryLabel: 'LAB', role: 'Prototype hardware', logo: '', fallback: 'SMD', detail: 'PCB assembly, SMD soldering, inspection and hands-on prototype validation.' },
-  { name: 'Altium DRC', category: 'debug', categoryLabel: 'REVIEW', role: 'Rules + checks', logo: 'https://cdn.simpleicons.org/altiumdesigner/00E5FF', fallback: 'DRC', detail: 'Clearance, width, polygon, silkscreen, Gerber and manufacturing checks before fabrication.' },
 
+ 
   // AI / Data
   { name: 'TensorFlow', category: 'ai', categoryLabel: 'AI', role: 'Deep learning', logo: 'https://cdn.simpleicons.org/tensorflow/00E5FF', fallback: 'TF', detail: 'LSTM-based gesture classification and machine-learning pipeline exposure in BCI projects.' },
   { name: 'PyTorch', category: 'ai', categoryLabel: 'AI', role: 'ML research tools', logo: 'https://cdn.simpleicons.org/pytorch/00E5FF', fallback: 'PT', detail: 'Machine-learning and deep-learning study for signal classification and experimentation.' },
