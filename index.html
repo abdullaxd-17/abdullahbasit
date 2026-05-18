@@ -1899,7 +1899,7 @@
   }
 
   .skill-logo-symbol.long-symbol {
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: -0.7px;
   }
 
@@ -2344,6 +2344,87 @@
   .skill-logo-card:hover .skill-logo-cube {
     border-color: rgba(0,229,255,0.46) !important;
     box-shadow: 0 22px 52px rgba(0,229,255,0.16) !important;
+  }
+
+
+
+  /* =====================================================
+     FINAL TEXT FIT FIX — skill cards
+     Keeps the same theme, only makes long names/roles fit.
+     Examples: Instrumentation Amplifiers, STM32CubeMX/CubeProgrammer.
+  ===================================================== */
+  #skills .skill-logo-face {
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 8px !important;
+  }
+
+  #skills .skill-logo-card {
+    min-height: 188px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  #skills .skill-logo-title {
+    width: 100% !important;
+    max-width: 132px !important;
+    min-height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    hyphens: auto !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.25px !important;
+    transform: translateZ(28px) !important;
+  }
+
+  #skills .skill-logo-title.fit-long-title {
+    font-size: 13px !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.45px !important;
+  }
+
+  #skills .skill-logo-title.fit-extra-long-title {
+    font-size: 11.5px !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.55px !important;
+  }
+
+  #skills .skill-logo-role {
+    width: 100% !important;
+    max-width: 136px !important;
+    min-height: 32px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    line-height: 1.24 !important;
+    letter-spacing: 1.05px !important;
+  }
+
+  #skills .skill-logo-role.fit-long-role {
+    font-size: 8px !important;
+    line-height: 1.18 !important;
+    letter-spacing: 0.65px !important;
+  }
+
+  #skills .skill-category-label {
+    max-width: 100% !important;
+    text-align: center !important;
+    line-height: 1.15 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  @media (max-width: 720px) {
+    #skills .skill-logo-title { max-width: 145px !important; }
+    #skills .skill-logo-role { max-width: 150px !important; }
   }
 
 </style>
@@ -3651,6 +3732,10 @@ function skillLogoHtml(tool) {
   const safeCategoryLabel = escapeHtml(tool.categoryLabel || 'SKILL');
   const safeRole = escapeHtml(tool.role || 'Engineering skill');
   const safeIcon = tool.icon ? escapeHtml(tool.icon) : '';
+  const rawName = String(tool.name || '');
+  const rawRole = String(tool.role || '');
+  const titleFitClass = rawName.length >= 24 ? ' fit-extra-long-title' : rawName.length >= 16 ? ' fit-long-title' : '';
+  const roleFitClass = rawRole.length >= 22 ? ' fit-long-role' : '';
   const customMark = skillCustomLogoMark(tool, safeName);
 
   // Display priority:
@@ -3681,8 +3766,8 @@ function skillLogoHtml(tool) {
       <div class="skill-logo-face">
         <div class="skill-category-label">${safeCategoryLabel}</div>
         <div class="${cubeClass}">${logoContent}</div>
-        <div class="skill-logo-title">${safeName}</div>
-        <div class="skill-logo-role">${safeRole}</div>
+        <div class="skill-logo-title${titleFitClass}">${safeName}</div>
+        <div class="skill-logo-role${roleFitClass}">${safeRole}</div>
       </div>
     </article>
   `;
