@@ -3588,6 +3588,622 @@
   .hero-bg-system::after { opacity: .38; }
 }
 
+
+
+/* =========================================================
+   MOBILE RESPONSIVE PATCH — content unchanged
+   Added only layout/touch fixes for phones and tablets.
+   ========================================================= */
+
+/* General protection against accidental horizontal overflow */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+canvas,
+model-viewer {
+  max-width: 100%;
+}
+
+section,
+header,
+footer,
+nav,
+div,
+article {
+  min-width: 0;
+}
+
+/* Touch screens do not need the custom desktop cursor */
+@media (hover: none), (pointer: coarse) {
+  body,
+  a,
+  button,
+  .exp-card,
+  .edu-card,
+  .proj-card,
+  .skill-logo-card,
+  .skill-filter-btn,
+  .pcb-board-btn,
+  .pcb-toggle-btn,
+  .contact-item {
+    cursor: auto !important;
+  }
+
+  .cursor,
+  .cursor-ring {
+    display: none !important;
+  }
+
+  /* Stop desktop tilt effects from disturbing touch scrolling */
+  [data-hero-card],
+  [data-skill-card],
+  .skill-logo-card,
+  .skill-logo-cube,
+  .hero-btn,
+  .mini-logo,
+  .logo-cube {
+    transform: none !important;
+  }
+
+  .skill-logo-card:hover,
+  .skill-cap-card:hover,
+  .focus-pill:hover,
+  .exp-card:hover {
+    transform: none !important;
+  }
+}
+
+/* Tablet layout */
+@media (max-width: 900px) {
+  nav {
+    padding: 12px 18px !important;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .nav-logo {
+    flex: 0 0 auto;
+  }
+
+  .nav-status {
+    font-size: 9px !important;
+    letter-spacing: 0.4px;
+    max-width: 52%;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .nav-links {
+    order: 3;
+    display: flex !important;
+    width: 100%;
+    gap: 10px !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 0 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links li {
+    flex: 0 0 auto;
+  }
+
+  .nav-links a {
+    display: inline-flex;
+    min-height: 34px;
+    align-items: center;
+    padding: 0 10px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(19,22,31,0.72);
+    font-size: 9px !important;
+    border-radius: 999px;
+  }
+
+  section {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .section-header {
+    padding-top: 78px !important;
+    margin-bottom: 28px !important;
+    gap: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(30px, 9vw, 42px) !important;
+    letter-spacing: -1.2px !important;
+  }
+
+  .section-line {
+    min-width: 32px;
+  }
+
+  #hero.hero-embedded {
+    min-height: auto !important;
+    padding: 132px 18px 56px !important;
+    display: block !important;
+  }
+
+  .hero-inner-embedded {
+    width: 100% !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    min-height: 0 !important;
+  }
+
+  .hero-copy-panel,
+  .hero-board-panel {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 24px !important;
+  }
+
+  .hero-name-embedded {
+    font-size: clamp(48px, 15vw, 76px) !important;
+    line-height: 0.92 !important;
+    letter-spacing: -2px !important;
+  }
+
+  .hero-status-pill {
+    width: fit-content;
+    max-width: 100%;
+    font-size: 9px !important;
+    line-height: 1.4;
+    white-space: normal !important;
+  }
+
+  .hero-engineer-line,
+  .hero-copy-text {
+    max-width: 100% !important;
+  }
+
+  .hero-actions-embedded {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px !important;
+  }
+
+  .hero-btn {
+    min-height: 46px;
+    flex: 1 1 220px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-skill-strip {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .hero-skill-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-skill-strip span {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .embedded-board-visual {
+    height: clamp(260px, 62vw, 390px) !important;
+  }
+
+  .board-metrics {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .hero-scroll-embedded {
+    position: relative !important;
+    left: auto !important;
+    bottom: auto !important;
+    margin-top: 20px;
+    width: fit-content;
+  }
+
+  .floating-module {
+    display: none !important;
+  }
+
+  .exp-card,
+  .edu-card,
+  .proj-card,
+  .report-card {
+    padding: 24px 20px !important;
+  }
+
+  .exp-meta,
+  .proj-header,
+  .pcb-2d-header,
+  .pcb-3d-header,
+  .pcb-2d-footer,
+  .pcb-3d-footer {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+
+  .exp-date,
+  .proj-year,
+  .pcb-2d-info,
+  .pcb-3d-controls-hint {
+    text-align: left !important;
+  }
+
+  .tabs-nav,
+  .pcb-board-toggle {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 8px !important;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .tabs-nav::-webkit-scrollbar,
+  .pcb-board-toggle::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn,
+  .pcb-board-btn {
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 10px 16px !important;
+    font-size: 9px !important;
+  }
+
+  .pcb-view-toggle {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pcb-toggle-btn {
+    width: 100%;
+    padding: 12px 10px !important;
+    font-size: 9px !important;
+  }
+
+  .pcb-real-image-wrap {
+    height: clamp(260px, 62vh, 430px) !important;
+    padding: 10px !important;
+  }
+
+  .pcb-real-image {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  #pcb3dCanvas,
+  .pcb-3d-model-viewer {
+    height: clamp(300px, 62vh, 460px) !important;
+  }
+
+  .pcb-features,
+  .reports-grid,
+  .contact-wrapper,
+  .edu-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .skills-overview,
+  .skills-cards,
+  .skill-stack-head {
+    grid-template-columns: 1fr !important;
+  }
+
+  .skill-stack-panel {
+    padding: 20px !important;
+  }
+
+  .skill-filter-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .skill-filter-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .skill-filter-btn {
+    flex: 0 0 auto;
+    padding: 10px 13px !important;
+    font-size: 9px !important;
+  }
+
+  #skills .skill-card-grid,
+  .skill-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  #skills .skill-logo-card,
+  .skill-logo-card {
+    min-height: 186px !important;
+    padding: 16px 10px 14px !important;
+  }
+
+  #skills .skill-logo-cube,
+  .skill-logo-cube {
+    width: 64px !important;
+    height: 64px !important;
+    border-radius: 18px !important;
+  }
+
+  #skills .skill-logo-cube img,
+  .skill-logo-cube img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  #skills .skill-logo-cube i,
+  .skill-logo-cube i {
+    font-size: 36px !important;
+  }
+
+  #skills .skill-logo-title,
+  .skill-logo-title {
+    max-width: 100% !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    font-size: 12px !important;
+    line-height: 1.08 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  #skills .skill-logo-role,
+  .skill-logo-role {
+    max-width: 100% !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    font-size: 7.2px !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0.55px !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .contact-wrapper {
+    gap: 26px !important;
+  }
+
+  .contact-wrapper[style] {
+    padding-top: 28px !important;
+  }
+
+  .contact-big {
+    font-size: clamp(38px, 12vw, 52px) !important;
+  }
+
+  .contact-item {
+    padding: 16px 18px !important;
+    align-items: flex-start !important;
+  }
+
+  .ci-text {
+    overflow-wrap: anywhere;
+    line-height: 1.45;
+  }
+
+  footer {
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px !important;
+  }
+}
+
+/* Phone layout */
+@media (max-width: 520px) {
+  nav {
+    padding: 10px 14px !important;
+  }
+
+  .nav-status {
+    display: none !important;
+  }
+
+  section {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  #hero.hero-embedded {
+    padding: 118px 14px 46px !important;
+  }
+
+  .hero-copy-panel,
+  .hero-board-panel,
+  .skill-stack-panel {
+    padding: 18px !important;
+  }
+
+  .hero-name-embedded {
+    font-size: clamp(42px, 18vw, 64px) !important;
+  }
+
+  .hero-actions-embedded {
+    flex-direction: column;
+  }
+
+  .hero-btn {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .hero-board-panel {
+    padding-bottom: 16px !important;
+  }
+
+  .embedded-board-visual {
+    height: 235px !important;
+  }
+
+  .board-window-top {
+    gap: 8px !important;
+  }
+
+  .board-window-top span,
+  .board-window-top strong {
+    font-size: 8px !important;
+  }
+
+  .peripheral-card {
+    transform: scale(0.86) !important;
+  }
+
+  .signal-pill {
+    transform: scale(0.86) !important;
+  }
+
+  .section-header {
+    padding-top: 64px !important;
+  }
+
+  .section-num {
+    font-size: 10px !important;
+  }
+
+  .exp-company,
+  .proj-title,
+  .edu-degree,
+  .report-title {
+    font-size: 17px !important;
+    line-height: 1.3 !important;
+  }
+
+  .exp-bullets li,
+  .proj-desc,
+  .edu-thesis,
+  .report-by,
+  .pcb-feat-desc {
+    font-size: 13px !important;
+  }
+
+  .tabs-nav,
+  .pcb-board-toggle,
+  .skill-filter-row {
+    margin-left: -14px;
+    margin-right: -14px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .pcb-2d-header,
+  .pcb-3d-header,
+  .pcb-2d-footer,
+  .pcb-3d-footer {
+    padding: 14px 16px !important;
+  }
+
+  .pcb-real-image-wrap {
+    height: 310px !important;
+  }
+
+  #pcb3dCanvas,
+  .pcb-3d-model-viewer {
+    height: 340px !important;
+  }
+
+  .pcb-feat {
+    padding: 20px !important;
+  }
+
+  #skills .skill-card-grid,
+  .skill-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  #skills .skill-logo-card,
+  .skill-logo-card {
+    min-height: 178px !important;
+    padding: 14px 8px 12px !important;
+  }
+
+  #skills .skill-logo-cube,
+  .skill-logo-cube {
+    width: 58px !important;
+    height: 58px !important;
+    border-radius: 16px !important;
+  }
+
+  #skills .skill-logo-cube img,
+  .skill-logo-cube img,
+  #skills .skill-svg-mark,
+  .skill-svg-mark {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  #skills .skill-logo-title,
+  .skill-logo-title {
+    font-size: 10.8px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+  }
+
+  #skills .skill-logo-role,
+  .skill-logo-role {
+    font-size: 6.7px !important;
+    letter-spacing: 0.35px !important;
+  }
+}
+
+/* Very narrow phones */
+@media (max-width: 360px) {
+  #skills .skill-card-grid,
+  .skill-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #skills .skill-logo-card,
+  .skill-logo-card {
+    min-height: 170px !important;
+  }
+
+  .embedded-board-visual {
+    height: 215px !important;
+  }
+
+  .hero-name-embedded {
+    font-size: clamp(38px, 17vw, 56px) !important;
+  }
+}
+
 </style>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
