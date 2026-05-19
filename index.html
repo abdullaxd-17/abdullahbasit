@@ -4395,6 +4395,114 @@ article {
   }
 }
 
+
+
+  /* =====================================================
+     REAL MOBILE SKILLS LOGO FIX
+     On phones, external icon fonts/CDN logos can report as loaded
+     but still render blank. This forces the built-in cyan backup
+     mark to show inside every skill cube on mobile/touch screens.
+     Desktop remains unchanged.
+  ===================================================== */
+  @media (max-width: 900px), (hover: none), (pointer: coarse) {
+    #skills .skill-card-grid,
+    .skill-card-grid {
+      display: grid !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    #skills .skill-logo-card,
+    .skill-logo-card,
+    #skills .skill-logo-face,
+    .skill-logo-face,
+    #skills .skill-logo-cube,
+    .skill-logo-cube {
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    #skills .skill-logo-cube,
+    .skill-logo-cube {
+      position: relative !important;
+      display: grid !important;
+      place-items: center !important;
+      overflow: hidden !important;
+      isolation: isolate !important;
+      transform: none !important;
+    }
+
+    /* Mobile uses reliable built-in SVG/initial marks, not external icon font rendering. */
+    #skills .skill-logo-cube > img,
+    #skills .skill-logo-cube > i[class*="devicon-"],
+    .skill-logo-cube > img,
+    .skill-logo-cube > i[class*="devicon-"] {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+
+    #skills .skill-logo-cube > .skill-logo-mark-backup,
+    #skills .skill-logo-cube.has-logo.logo-loaded > .skill-logo-mark-backup,
+    #skills .skill-logo-cube.has-devicon.icon-loaded > .skill-logo-mark-backup,
+    #skills .skill-logo-cube.logo-fallback-active > .skill-logo-mark-backup,
+    .skill-logo-cube > .skill-logo-mark-backup,
+    .skill-logo-cube.has-logo.logo-loaded > .skill-logo-mark-backup,
+    .skill-logo-cube.has-devicon.icon-loaded > .skill-logo-mark-backup,
+    .skill-logo-cube.logo-fallback-active > .skill-logo-mark-backup {
+      display: grid !important;
+      place-items: center !important;
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      z-index: 10 !important;
+      pointer-events: none !important;
+    }
+
+    #skills .skill-logo-cube .skill-svg-mark,
+    .skill-logo-cube .skill-svg-mark {
+      display: block !important;
+      width: 40px !important;
+      height: 40px !important;
+      max-width: 40px !important;
+      max-height: 40px !important;
+      color: var(--accent) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      filter: drop-shadow(0 0 14px rgba(0,229,255,0.45)) !important;
+    }
+
+    #skills .skill-logo-cube .skill-logo-symbol,
+    #skills .skill-logo-cube .skill-logo-fallback,
+    .skill-logo-cube .skill-logo-symbol,
+    .skill-logo-cube .skill-logo-fallback {
+      display: grid !important;
+      place-items: center !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      z-index: 11 !important;
+    }
+
+    #skills .skill-logo-cube .skill-logo-symbol,
+    .skill-logo-cube .skill-logo-symbol {
+      width: 42px !important;
+      height: 42px !important;
+      font-size: 18px !important;
+      color: var(--accent) !important;
+      border-color: rgba(0,229,255,0.35) !important;
+      background: radial-gradient(circle, rgba(0,229,255,0.22), rgba(0,229,255,0.07) 58%, transparent 74%) !important;
+    }
+
+    #skills .skill-logo-cube .skill-logo-symbol.long-symbol,
+    .skill-logo-cube .skill-logo-symbol.long-symbol {
+      font-size: 11px !important;
+      letter-spacing: -0.6px !important;
+    }
+  }
+
 </style>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
@@ -6032,6 +6140,36 @@ function initInteractiveToolStack() {
 window.addEventListener('DOMContentLoaded', initInteractiveToolStack);
 window.addEventListener('load', () => fitSkillTextToCards(document));
 window.addEventListener('resize', () => fitSkillTextToCards(document));
+
+// Real mobile skills logo fix: on mobile/touch, keep the built-in fallback marks active.
+function forceMobileSkillLogoFallbacks() {
+  const isMobileSkillsView = window.matchMedia('(max-width: 900px), (hover: none), (pointer: coarse)').matches;
+  if (!isMobileSkillsView) return;
+
+  document.querySelectorAll('#skills .skill-logo-cube').forEach(cube => {
+    cube.classList.remove('logo-loaded', 'icon-loaded');
+    cube.classList.add('logo-fallback-active', 'mobile-safe-logo');
+
+    const backup = cube.querySelector('.skill-logo-mark-backup');
+    if (backup) {
+      backup.style.setProperty('display', 'grid', 'important');
+      backup.style.setProperty('opacity', '1', 'important');
+      backup.style.setProperty('visibility', 'visible', 'important');
+    }
+
+    cube.querySelectorAll('img, i[class*="devicon-"]').forEach(el => {
+      el.style.setProperty('display', 'none', 'important');
+      el.style.setProperty('opacity', '0', 'important');
+      el.style.setProperty('visibility', 'hidden', 'important');
+    });
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => requestAnimationFrame(forceMobileSkillLogoFallbacks));
+window.addEventListener('load', forceMobileSkillLogoFallbacks);
+window.addEventListener('resize', forceMobileSkillLogoFallbacks);
+window.addEventListener('orientationchange', forceMobileSkillLogoFallbacks);
+
 
 
 
