@@ -2517,6 +2517,1077 @@
     #skills .skill-logo-card { min-height: 200px !important; }
   }
 
+
+
+/* ============================================
+   EMBEDDED / PCB ANIMATED HERO — FINAL UPGRADE
+   ============================================ */
+#hero.hero-embedded {
+  --mx: 50%;
+  --my: 35%;
+  position: relative !important;
+  z-index: 1;
+  max-width: 100% !important;
+  min-height: 100vh;
+  padding: 112px 60px 72px !important;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at var(--mx) var(--my), rgba(0,229,255,0.16), transparent 24%),
+    radial-gradient(circle at 78% 18%, rgba(124,109,250,0.16), transparent 28%),
+    linear-gradient(180deg, rgba(10,12,16,0.52), rgba(10,12,16,0.98) 78%);
+}
+
+#hero.hero-embedded::before {
+  content: '';
+  position: absolute;
+  inset: 78px 24px 28px;
+  border: 1px solid rgba(0,229,255,0.10);
+  border-radius: 30px;
+  background:
+    linear-gradient(90deg, rgba(0,229,255,0.10), transparent 14%, transparent 86%, rgba(124,109,250,0.10)),
+    linear-gradient(180deg, rgba(255,255,255,0.035), transparent 24%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.025),
+    0 28px 120px rgba(0,0,0,0.24);
+  pointer-events: none;
+  z-index: -1;
+}
+
+#hero.hero-embedded::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 110%, rgba(0,229,255,0.08), transparent 36%),
+    linear-gradient(transparent 78%, rgba(10,12,16,1));
+  pointer-events: none;
+  z-index: 4;
+}
+
+.hero-bg-system {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-bg-grid {
+  position: absolute;
+  inset: -40px;
+  background-image:
+    linear-gradient(rgba(0,229,255,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.055) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at var(--mx) var(--my), black 0 42%, transparent 76%);
+  animation: pcbGridDrift 18s linear infinite;
+}
+
+.hero-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -35%;
+  height: 34%;
+  background: linear-gradient(180deg, transparent, rgba(0,229,255,0.08), transparent);
+  transform: skewY(-6deg);
+  animation: scanPass 7s ease-in-out infinite;
+  opacity: 0.75;
+}
+
+.hero-pcb-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.72;
+}
+
+.pcb-route {
+  fill: none;
+  stroke: url(#traceGradient);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 14 18;
+  animation: traceDash 18s linear infinite;
+}
+
+.route-two { animation-duration: 21s; opacity: .78; }
+.route-three { animation-duration: 16s; opacity: .62; }
+.route-four { animation-duration: 24s; opacity: .58; }
+
+.pcb-nodes circle {
+  fill: rgba(0,229,255,0.9);
+  filter: url(#traceGlow);
+  animation: nodeGlow 2.8s ease-in-out infinite;
+}
+
+.pcb-nodes circle:nth-child(2n) { animation-delay: .65s; }
+.pcb-nodes circle:nth-child(3n) { animation-delay: 1.25s; }
+
+.data-packet { fill: #00e5ff; opacity: .95; }
+.packet-b { fill: #7c6dfa; }
+.packet-c { fill: #38bdf8; }
+.packet-d { fill: #f7fbff; }
+
+.floating-module {
+  position: absolute;
+  min-width: 96px;
+  padding: 12px 14px;
+  border: 1px solid rgba(0,229,255,0.18);
+  background: rgba(10,12,16,0.56);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 54px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.07);
+  border-radius: 18px;
+  animation: floatModule 6s ease-in-out infinite;
+}
+
+.floating-module span,
+.floating-module small { display: block; }
+.floating-module span {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: .4px;
+}
+.floating-module small {
+  margin-top: 3px;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: rgba(232,234,240,0.48);
+  letter-spacing: 1.4px;
+}
+.module-a { left: 8%; top: 20%; }
+.module-b { right: 8%; top: 23%; animation-delay: -1.2s; }
+.module-c { left: 11%; bottom: 18%; animation-delay: -2.4s; }
+.module-d { right: 13%; bottom: 16%; animation-delay: -3.6s; }
+
+.hero-inner-embedded {
+  width: min(1240px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(430px, .95fr);
+  gap: 46px;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.hero-copy-panel,
+.hero-board-panel {
+  transform-style: preserve-3d;
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+
+.hero-copy-panel {
+  position: relative;
+  padding: 26px 0 26px 10px;
+}
+
+.hero-copy-panel::before {
+  content: '';
+  position: absolute;
+  left: -18px;
+  top: 16px;
+  bottom: 16px;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--accent), var(--accent2), transparent);
+  transform: scaleY(0);
+  transform-origin: top;
+  animation: heroLineBoot 1.25s .35s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.hero-status-pill {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 24px;
+  padding: 10px 14px;
+  border: 1px solid rgba(0,229,255,0.22);
+  background: rgba(0,229,255,0.055);
+  color: var(--accent);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  border-radius: 999px;
+  backdrop-filter: blur(18px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 45px rgba(0,0,0,0.18);
+  opacity: 0;
+  animation: heroFadeUp .75s .2s forwards;
+}
+
+.status-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 6px rgba(34,197,94,0.08), 0 0 18px rgba(34,197,94,.95);
+  animation: statusHeartbeat 1.55s ease-in-out infinite;
+}
+
+.hero-name-embedded {
+  position: relative;
+  display: grid;
+  gap: 0;
+  margin: 0;
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(62px, 10vw, 132px);
+  font-weight: 800;
+  line-height: .82;
+  letter-spacing: -5.5px;
+  filter: drop-shadow(0 26px 56px rgba(0,0,0,.36));
+  opacity: 0;
+  animation: heroFadeUp .85s .38s forwards;
+}
+
+.name-row {
+  position: relative;
+  width: fit-content;
+  display: block;
+  color: var(--text);
+  transition: transform .45s cubic-bezier(.22,1,.36,1), letter-spacing .45s ease, filter .45s ease;
+}
+
+.name-row::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0,229,255,.34);
+  transform: translate(12px, 10px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.name-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: .08em;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,.85), rgba(124,109,250,.75), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  filter: blur(.2px);
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+
+.name-row-bottom {
+  background: linear-gradient(115deg, var(--accent), #f6fbff 36%, #38bdf8 58%, var(--accent2));
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: nameGradientRun 5s ease-in-out infinite;
+}
+
+.hero-name-embedded:hover .name-row-top { transform: translateX(12px) translateZ(50px); letter-spacing: -3px; }
+.hero-name-embedded:hover .name-row-bottom { transform: translateX(34px) translateZ(64px); letter-spacing: -3px; }
+.hero-name-embedded:hover .name-row::before { opacity: 1; transform: translate(18px, 13px); }
+.hero-name-embedded:hover .name-row::after { transform: scaleX(1); }
+
+.hero-engineer-line {
+  width: fit-content;
+  margin-top: 28px;
+  padding: 10px 14px;
+  border-left: 2px solid var(--accent);
+  background: rgba(19,22,31,.62);
+  color: var(--text-dim);
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(16px, 2.2vw, 23px);
+  font-weight: 500;
+  backdrop-filter: blur(16px);
+  opacity: 0;
+  animation: heroFadeUp .75s .58s forwards;
+}
+
+.hero-copy-text {
+  max-width: 650px;
+  margin-top: 24px;
+  color: #aab2c2;
+  font-size: 16.5px;
+  line-height: 1.85;
+  opacity: 0;
+  animation: heroFadeUp .75s .72s forwards;
+}
+
+.hero-actions-embedded {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+  opacity: 0;
+  animation: heroFadeUp .75s .88s forwards;
+}
+
+.hero-btn {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  padding: 14px 30px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 18px 50px rgba(0,0,0,.25);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), border-color .35s ease, box-shadow .35s ease, color .35s ease;
+  cursor: none;
+}
+
+.hero-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.32), transparent);
+  transform: translateX(-125%);
+  transition: transform .62s ease;
+}
+
+.hero-btn::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--btn-x, 50%) var(--btn-y, 50%), rgba(255,255,255,.25), transparent 32%);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.hero-btn span,
+.hero-btn b { position: relative; z-index: 1; }
+.hero-btn:hover { transform: translateY(-5px); }
+.hero-btn:hover::before { transform: translateX(125%); }
+.hero-btn:hover::after { opacity: 1; }
+.hero-btn-primary {
+  background: linear-gradient(135deg, var(--accent), #38bdf8 46%, var(--accent2));
+  color: #061015;
+  font-weight: 700;
+}
+.hero-btn-primary:hover { box-shadow: 0 22px 60px rgba(0,229,255,.16); }
+.hero-btn-ghost {
+  color: var(--text-dim);
+  background: rgba(19,22,31,.68);
+  border-color: rgba(0,229,255,.26);
+  backdrop-filter: blur(14px);
+}
+.hero-btn-ghost:hover { color: var(--accent); border-color: rgba(0,229,255,.66); }
+
+.hero-skill-strip {
+  max-width: 730px;
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  opacity: 0;
+  animation: heroFadeUp .75s 1.02s forwards;
+}
+
+.hero-skill-strip span {
+  position: relative;
+  overflow: hidden;
+  padding: 8px 14px;
+  border: 1px solid rgba(255,255,255,.09);
+  background: rgba(19,22,31,.72);
+  border-radius: 999px;
+  color: #9aa4b7;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.45px;
+  transition: transform .28s ease, color .28s ease, border-color .28s ease, background .28s ease;
+}
+
+.hero-skill-strip span::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,.18), transparent);
+  transform: translateX(-120%);
+  transition: transform .5s ease;
+}
+
+.hero-skill-strip span:hover {
+  transform: translateY(-5px);
+  color: var(--accent);
+  border-color: rgba(0,229,255,.42);
+  background: rgba(0,229,255,.055);
+}
+.hero-skill-strip span:hover::before { transform: translateX(120%); }
+
+.hero-board-panel {
+  position: relative;
+  min-height: 610px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 28px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0,229,255,.14), transparent 34%),
+    linear-gradient(145deg, rgba(19,22,31,.92), rgba(8,11,17,.96));
+  box-shadow:
+    0 34px 100px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  opacity: 0;
+  animation: heroCardBoot .95s .66s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.hero-board-panel::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(145deg, rgba(0,229,255,.45), transparent 32%, rgba(124,109,250,.36));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: .75;
+  pointer-events: none;
+}
+
+.hero-board-panel:hover {
+  border-color: rgba(0,229,255,.32);
+  box-shadow: 0 38px 120px rgba(0,0,0,.38), 0 0 50px rgba(0,229,255,.08);
+}
+
+.board-window-top {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 22px;
+  border-bottom: 1px solid rgba(255,255,255,.075);
+  background: rgba(10,12,16,.46);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+
+.window-dots { display: flex; gap: 7px; }
+.window-dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+}
+.window-dots i:nth-child(1) { background: rgba(255,107,53,.75); }
+.window-dots i:nth-child(2) { background: rgba(0,229,255,.75); }
+.window-dots i:nth-child(3) { background: rgba(34,197,94,.75); }
+.board-window-top strong { color: var(--accent); font-weight: 700; }
+
+.embedded-board-visual {
+  position: relative;
+  height: 430px;
+  margin: 24px;
+  border: 1px solid rgba(0,229,255,.12);
+  border-radius: 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0,229,255,.10), transparent 34%),
+    radial-gradient(circle at 78% 22%, rgba(124,109,250,.10), transparent 25%),
+    #071117;
+  box-shadow: inset 0 0 60px rgba(0,0,0,.45);
+}
+
+.board-grid-mini {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  animation: boardGridMove 10s linear infinite;
+}
+
+.main-chip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 170px;
+  height: 170px;
+  transform: translate(-50%, -50%);
+  border-radius: 26px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02)),
+    #101722;
+  border: 1px solid rgba(0,229,255,.28);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 28px 68px rgba(0,0,0,.45), 0 0 46px rgba(0,229,255,.14);
+  display: grid;
+  place-items: center;
+  z-index: 5;
+  animation: chipBreath 3.2s ease-in-out infinite;
+}
+
+.main-chip::before,
+.main-chip::after {
+  content: '';
+  position: absolute;
+  border: 1px solid rgba(0,229,255,.12);
+  border-radius: 20px;
+  inset: 15px;
+}
+.main-chip::after { inset: 30px; border-color: rgba(124,109,250,.14); }
+
+.chip-label,
+.chip-core {
+  position: absolute;
+  font-family: 'Space Mono', monospace;
+  text-align: center;
+}
+.chip-label {
+  top: 36px;
+  color: var(--text-muted);
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+.chip-core {
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 20px rgba(0,229,255,.48);
+}
+
+.pin {
+  position: absolute;
+  width: 5px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(0,229,255,.58);
+  box-shadow: 0 0 12px rgba(0,229,255,.38);
+}
+.p1,.p2,.p3 { top: -13px; } .p4,.p5,.p6 { bottom: -13px; }
+.p7,.p8,.p9 { left: -13px; width:18px; height:5px; } .p10,.p11,.p12 { right: -13px; width:18px; height:5px; }
+.p1 { left: 38px; } .p2 { left: 82px; } .p3 { right: 38px; }
+.p4 { left: 38px; } .p5 { left: 82px; } .p6 { right: 38px; }
+.p7 { top: 40px; } .p8 { top: 82px; } .p9 { bottom: 40px; }
+.p10 { top: 40px; } .p11 { top: 82px; } .p12 { bottom: 40px; }
+
+.board-trace {
+  position: absolute;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(0,229,255,.05), rgba(0,229,255,.88), rgba(124,109,250,.72), rgba(0,229,255,.05));
+  box-shadow: 0 0 18px rgba(0,229,255,.18);
+  transform-origin: left center;
+  animation: boardTracePulse 2.8s ease-in-out infinite;
+}
+.trace-1 { left: 9%; top: 31%; width: 34%; }
+.trace-2 { right: 9%; top: 31%; width: 34%; animation-delay: .28s; }
+.trace-3 { left: 9%; bottom: 31%; width: 34%; animation-delay: .56s; }
+.trace-4 { right: 9%; bottom: 31%; width: 34%; animation-delay: .84s; }
+.trace-5 { left: 50%; top: 8%; width: 3px; height: 28%; transform-origin: top center; animation-delay: 1.12s; }
+.trace-6 { left: 50%; bottom: 8%; width: 3px; height: 28%; transform-origin: bottom center; animation-delay: 1.4s; }
+
+.peripheral-card {
+  position: absolute;
+  min-width: 92px;
+  padding: 10px 11px;
+  border-radius: 16px;
+  border: 1px solid rgba(0,229,255,.17);
+  background: rgba(10,12,16,.72);
+  box-shadow: 0 14px 34px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.06);
+  z-index: 4;
+  transition: transform .35s ease, border-color .35s ease, background .35s ease;
+}
+.peripheral-card b,
+.peripheral-card small { display: block; }
+.peripheral-card b { color: var(--accent); font-family: 'Syne', sans-serif; font-size: 16px; }
+.peripheral-card small { margin-top: 2px; color: var(--text-muted); font-size: 10px; font-family: 'Space Mono', monospace; }
+.peripheral-a { left: 8%; top: 18%; }
+.peripheral-b { right: 8%; top: 18%; }
+.peripheral-c { left: 8%; bottom: 18%; }
+.peripheral-d { right: 8%; bottom: 18%; }
+.hero-board-panel:hover .peripheral-card { transform: translateY(-5px); border-color: rgba(0,229,255,.38); background: rgba(0,229,255,.055); }
+
+.signal-pill {
+  position: absolute;
+  z-index: 6;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,229,255,.26);
+  background: rgba(0,229,255,.075);
+  color: var(--accent);
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  box-shadow: 0 0 18px rgba(0,229,255,.10);
+  animation: signalFloat 2.6s ease-in-out infinite;
+}
+.bus-i2c { left: 37%; top: 18%; }
+.bus-spi { right: 34%; top: 18%; animation-delay: .45s; }
+.bus-uart { left: 33%; bottom: 18%; animation-delay: .9s; }
+.bus-can { right: 36%; bottom: 18%; animation-delay: 1.35s; }
+
+.board-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 0 24px 24px;
+}
+.board-metrics div {
+  min-height: 84px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+  background: rgba(10,12,16,.48);
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  transition: transform .3s ease, border-color .3s ease, background .3s ease;
+}
+.board-metrics div:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,229,255,.34);
+  background: rgba(0,229,255,.055);
+}
+.board-metrics strong {
+  font-family: 'Syne', sans-serif;
+  font-size: 30px;
+  color: var(--accent);
+  line-height: 1;
+}
+.board-metrics span {
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: .6px;
+}
+
+.hero-scroll-embedded {
+  position: absolute;
+  left: 60px;
+  bottom: 35px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: heroFadeUp .75s 1.25s forwards;
+  cursor: none;
+}
+.hero-scroll-embedded span {
+  width: 42px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  animation: scrollLineLive 1.8s ease-in-out infinite;
+}
+.hero-scroll-embedded:hover { color: var(--accent); }
+
+@keyframes pcbGridDrift { to { transform: translate3d(56px,56px,0); } }
+@keyframes scanPass {
+  0%, 100% { transform: translateY(-20%) skewY(-6deg); opacity: 0; }
+  18%, 58% { opacity: .75; }
+  70% { transform: translateY(380%) skewY(-6deg); opacity: 0; }
+}
+@keyframes traceDash { to { stroke-dashoffset: -420; } }
+@keyframes nodeGlow { 0%,100% { opacity:.42; transform: scale(1); } 50% { opacity:1; transform: scale(1.55); } }
+@keyframes floatModule { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-16px,0); } }
+@keyframes heroLineBoot { to { transform: scaleY(1); } }
+@keyframes heroFadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: translateY(0); } }
+@keyframes heroCardBoot { from { opacity:0; transform: translateY(26px) rotateX(8deg); } to { opacity:1; transform: translateY(0) rotateX(0); } }
+@keyframes statusHeartbeat { 0%,100% { transform: scale(1); opacity:1; } 50% { transform: scale(.66); opacity:.55; } }
+@keyframes nameGradientRun { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes boardGridMove { to { transform: translate3d(28px,28px,0); } }
+@keyframes chipBreath { 0%,100% { box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 28px 68px rgba(0,0,0,.45), 0 0 38px rgba(0,229,255,.12); } 50% { box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 32px 74px rgba(0,0,0,.52), 0 0 64px rgba(0,229,255,.22); } }
+@keyframes boardTracePulse { 0%,100% { opacity:.34; filter: brightness(.9); } 50% { opacity:1; filter: brightness(1.45); } }
+@keyframes signalFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes scrollLineLive { 0%,100% { width:42px; opacity:.55; } 50% { width:70px; opacity:1; } }
+
+@media (max-width: 1120px) {
+  #hero.hero-embedded { padding: 110px 34px 90px !important; }
+  .hero-inner-embedded { grid-template-columns: 1fr; gap: 32px; }
+  .hero-board-panel { min-height: 560px; }
+  .module-a, .module-b, .module-c, .module-d { opacity: .45; }
+}
+
+@media (max-width: 720px) {
+  #hero.hero-embedded { padding: 104px 22px 86px !important; }
+  #hero.hero-embedded::before { inset: 72px 10px 24px; border-radius: 22px; }
+  .hero-copy-panel { padding-left: 8px; }
+  .hero-copy-panel::before { left: -8px; }
+  .hero-status-pill { font-size: 8.5px; letter-spacing: 1.4px; }
+  .hero-name-embedded { font-size: clamp(54px, 18vw, 86px); letter-spacing: -3px; }
+  .hero-name-embedded:hover .name-row-top,
+  .hero-name-embedded:hover .name-row-bottom { transform: none; letter-spacing: -3px; }
+  .hero-actions-embedded { flex-direction: column; align-items: stretch; }
+  .hero-btn { width: 100%; }
+  .hero-board-panel { min-height: 520px; border-radius: 22px; }
+  .embedded-board-visual { height: 355px; margin: 16px; }
+  .main-chip { width: 132px; height: 132px; border-radius: 22px; }
+  .peripheral-card { min-width: 72px; padding: 8px; }
+  .peripheral-card b { font-size: 13px; }
+  .peripheral-card small { font-size: 8px; }
+  .board-metrics { grid-template-columns: 1fr; padding: 0 16px 16px; }
+  .board-metrics div { min-height: 62px; }
+  .hero-scroll-embedded { left: 22px; bottom: 28px; }
+  .floating-module { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #hero.hero-embedded *,
+  #hero.hero-embedded *::before,
+  #hero.hero-embedded *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+
+/* ============================================
+   HERO BALANCE FIX — keeps your animation, fixes oversized/cut name
+   ============================================ */
+#hero.hero-embedded {
+  padding: 104px clamp(28px, 4vw, 70px) 70px !important;
+}
+
+.hero-inner-embedded {
+  width: min(1380px, 100%) !important;
+  grid-template-columns: minmax(560px, 0.98fr) minmax(430px, 0.88fr) !important;
+  gap: clamp(34px, 4.2vw, 72px) !important;
+}
+
+.hero-copy-panel {
+  z-index: 2;
+  min-width: 0;
+  max-width: 720px;
+}
+
+.hero-board-panel {
+  z-index: 1;
+  min-width: 0;
+  justify-self: end;
+  width: min(100%, 560px);
+  min-height: 560px;
+}
+
+.hero-name-embedded {
+  font-size: clamp(58px, 6.25vw, 108px) !important;
+  line-height: .88 !important;
+  letter-spacing: clamp(-4.8px, -0.32vw, -2.7px) !important;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.name-row {
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.name-row-top,
+.name-row-bottom {
+  will-change: transform;
+}
+
+.hero-name-embedded:hover .name-row-top {
+  transform: translateX(8px) translateZ(42px) !important;
+  letter-spacing: -2.4px !important;
+}
+
+.hero-name-embedded:hover .name-row-bottom {
+  transform: translateX(18px) translateZ(54px) !important;
+  letter-spacing: -2.4px !important;
+}
+
+.hero-engineer-line {
+  margin-top: 24px;
+  max-width: 690px;
+}
+
+.hero-copy-text {
+  max-width: 650px;
+}
+
+.hero-skill-strip {
+  max-width: 660px;
+}
+
+/* Make the decorative dashed traces stay behind the content so they never cover the name. */
+.hero-pcb-svg,
+.hero-bg-grid,
+.hero-scan,
+.floating-module {
+  z-index: -1;
+}
+
+@media (min-width: 1500px) {
+  .hero-inner-embedded {
+    width: min(1420px, 100%) !important;
+    grid-template-columns: minmax(620px, 1fr) minmax(460px, 0.82fr) !important;
+  }
+
+  .hero-name-embedded {
+    font-size: clamp(72px, 5.85vw, 112px) !important;
+  }
+}
+
+@media (max-width: 1280px) {
+  .hero-inner-embedded {
+    grid-template-columns: minmax(0, 1fr) minmax(390px, 0.82fr) !important;
+    gap: 32px !important;
+  }
+
+  .hero-name-embedded {
+    font-size: clamp(56px, 7.2vw, 94px) !important;
+  }
+
+  .hero-board-panel {
+    width: min(100%, 500px);
+    min-height: 530px;
+  }
+
+  .embedded-board-visual { height: 390px; }
+}
+
+@media (max-width: 1120px) {
+  .hero-inner-embedded { grid-template-columns: 1fr !important; }
+  .hero-copy-panel { max-width: 820px; }
+  .hero-board-panel { justify-self: stretch; width: 100%; min-height: 560px; }
+  .hero-name-embedded { font-size: clamp(60px, 11vw, 110px) !important; }
+}
+
+@media (max-width: 720px) {
+  .hero-name-embedded { font-size: clamp(48px, 16vw, 78px) !important; line-height: .9 !important; }
+  .hero-engineer-line { font-size: 15px; }
+}
+
+
+
+/* ============================================
+   HERO PROFESSIONAL PCB BACKGROUND — no glowing balls
+   Replaces the playful moving dots with subtle logic-analyzer and PCB trace motion.
+   ============================================ */
+.orb {
+  display: none !important;
+}
+
+#hero.hero-embedded {
+  background:
+    radial-gradient(ellipse at 68% 42%, rgba(0,229,255,0.085), transparent 30%),
+    radial-gradient(ellipse at 28% 70%, rgba(124,109,250,0.060), transparent 34%),
+    linear-gradient(135deg, #080b11 0%, #0a0f17 48%, #0b0d17 100%) !important;
+}
+
+#hero.hero-embedded::before {
+  border-color: rgba(0,229,255,0.13) !important;
+  background:
+    linear-gradient(90deg, rgba(0,229,255,0.08), transparent 18%, transparent 82%, rgba(124,109,250,0.07)),
+    linear-gradient(180deg, rgba(255,255,255,0.030), transparent 28%) !important;
+}
+
+#hero.hero-embedded::after {
+  background:
+    linear-gradient(90deg, rgba(10,12,16,.10), transparent 20%, transparent 78%, rgba(10,12,16,.34)),
+    linear-gradient(transparent 80%, rgba(10,12,16,1)) !important;
+}
+
+.hero-bg-system::before {
+  content: '';
+  position: absolute;
+  inset: 76px 30px 30px;
+  border-radius: 28px;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 62px, rgba(0,229,255,0.040) 63px, transparent 64px),
+    repeating-linear-gradient(90deg, transparent 0 118px, rgba(124,109,250,0.045) 119px, transparent 120px);
+  mask-image: linear-gradient(90deg, transparent 0, black 10%, black 90%, transparent 100%);
+  opacity: .72;
+}
+
+.hero-bg-system::after {
+  content: '';
+  position: absolute;
+  left: -18%;
+  right: -18%;
+  top: 48%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,.28), rgba(124,109,250,.20), transparent);
+  box-shadow:
+    0 -110px 0 rgba(0,229,255,.050),
+    0 96px 0 rgba(124,109,250,.050),
+    0 180px 0 rgba(0,229,255,.035);
+  transform: translateX(-12%);
+  animation: professionalBusSweep 9s cubic-bezier(.22,1,.36,1) infinite;
+  opacity: .72;
+  pointer-events: none;
+}
+
+.hero-bg-grid {
+  opacity: .50 !important;
+  background-size: 54px 54px !important;
+  mask-image: linear-gradient(90deg, rgba(0,0,0,.92), rgba(0,0,0,.54) 46%, rgba(0,0,0,.82)) !important;
+  animation: pcbGridDriftProfessional 34s linear infinite !important;
+}
+
+.hero-scan {
+  top: -22% !important;
+  height: 18% !important;
+  opacity: .24 !important;
+  background: linear-gradient(180deg, transparent, rgba(0,229,255,0.045), transparent) !important;
+  animation: scanPassProfessional 11s ease-in-out infinite !important;
+}
+
+/* Remove non-professional glowing ball motion from the background. */
+.pcb-nodes,
+.data-packet {
+  display: none !important;
+}
+
+.hero-pcb-svg {
+  opacity: .46 !important;
+}
+
+.pcb-route {
+  stroke-width: 1.25 !important;
+  stroke-dasharray: 110 28 16 28 !important;
+  opacity: .42 !important;
+  animation-duration: 36s !important;
+}
+
+.route-two { opacity: .34 !important; animation-duration: 42s !important; }
+.route-three { opacity: .28 !important; animation-duration: 32s !important; }
+.route-four { opacity: .30 !important; animation-duration: 46s !important; }
+
+.logic-bg-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .82;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.logic-track {
+  fill: none;
+  stroke: rgba(0,229,255,.145);
+  stroke-width: 1.2;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-dasharray: 760;
+  stroke-dashoffset: 760;
+  animation: logicTraceDraw 9.5s cubic-bezier(.22,1,.36,1) infinite;
+}
+.logic-track.track-two {
+  stroke: rgba(124,109,250,.135);
+  animation-delay: 1.7s;
+  animation-duration: 11.5s;
+}
+.logic-track.track-three {
+  stroke: rgba(56,189,248,.12);
+  animation-delay: 3.1s;
+  animation-duration: 12.8s;
+}
+
+.bus-rect {
+  fill: url(#busRectGradient);
+  opacity: .62;
+  rx: 2;
+  filter: none;
+}
+.bus-rect.secondary { opacity: .40; }
+.bus-rect.tertiary { opacity: .32; }
+
+.smd-field rect,
+.corner-pads rect {
+  fill: rgba(0,229,255,.12);
+  stroke: rgba(0,229,255,.10);
+  stroke-width: .8;
+  animation: padSoftBlink 5.8s ease-in-out infinite;
+}
+.smd-field rect:nth-child(3n) { animation-delay: 1.2s; fill: rgba(124,109,250,.10); }
+.smd-field rect:nth-child(4n) { animation-delay: 2.1s; opacity: .55; }
+.corner-pads rect { opacity: .65; }
+
+.microchip-outline {
+  fill: rgba(10,12,16,.12);
+  stroke: rgba(0,229,255,.10);
+  stroke-width: 1;
+  stroke-dasharray: 8 8;
+  animation: outlineMarch 18s linear infinite;
+}
+
+.floating-module {
+  border-radius: 10px !important;
+  min-width: 118px !important;
+  padding: 10px 13px !important;
+  background: rgba(7,12,18,0.40) !important;
+  border-color: rgba(0,229,255,0.13) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.045) !important;
+  opacity: .54 !important;
+  animation: moduleSoftDrift 10s ease-in-out infinite !important;
+}
+.floating-module span { font-size: 14px !important; }
+.floating-module small { font-size: 7px !important; letter-spacing: 1.6px !important; }
+.module-a { left: 5.5% !important; top: 24% !important; }
+.module-b { right: 5.5% !important; top: 24% !important; }
+.module-c { left: 6.5% !important; bottom: 20% !important; }
+.module-d { right: 8% !important; bottom: 18% !important; }
+
+@keyframes pcbGridDriftProfessional {
+  to { transform: translate3d(54px, 54px, 0); }
+}
+
+@keyframes scanPassProfessional {
+  0%, 100% { transform: translateY(-30%) skewY(-4deg); opacity: 0; }
+  20%, 54% { opacity: .24; }
+  68% { transform: translateY(560%) skewY(-4deg); opacity: 0; }
+}
+
+@keyframes professionalBusSweep {
+  0%, 100% { transform: translateX(-16%); opacity: .18; }
+  45% { transform: translateX(16%); opacity: .76; }
+  70% { opacity: .36; }
+}
+
+@keyframes logicTraceDraw {
+  0% { stroke-dashoffset: 760; opacity: .05; }
+  18% { opacity: .46; }
+  58% { stroke-dashoffset: 0; opacity: .34; }
+  100% { stroke-dashoffset: -760; opacity: .06; }
+}
+
+@keyframes padSoftBlink {
+  0%,100% { opacity: .24; }
+  50% { opacity: .72; }
+}
+
+@keyframes outlineMarch {
+  to { stroke-dashoffset: -160; }
+}
+
+@keyframes moduleSoftDrift {
+  0%, 100% { transform: translate3d(0,0,0); }
+  50% { transform: translate3d(0,-6px,0); }
+}
+
+@media (max-width: 720px) {
+  .logic-bg-svg { opacity: .44; }
+  .hero-bg-system::before,
+  .hero-bg-system::after { opacity: .38; }
+}
+
 </style>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
@@ -2546,52 +3617,196 @@
 </nav>
 
 <!-- HERO -->
-<div id="hero" style="position:relative;max-width:100%;">
-  <div style="max-width:1200px;margin:0 auto;">
-    <div class="hero-eyebrow">Hardware Design Engineer</div>
-    <h1 class="hero-name">
-      Abdullah<br>
-      <span>Basit</span>
-    </h1>
-    <div class="hero-title">M1 Electrical Engineering · Université Grenoble Alpes</div>
-    <p class="hero-desc">
-      Designing hardware at the intersection of embedded systems, mixed-signal PCBs, and space-grade electronics. Currently building STM32-based satellite boards at Centre Spatial Universitaire de Grenoble.
-    </p>
-    <div class="hero-cta">
-      <a class="btn-primary" href="#projects">View Projects</a>
-      <a class="btn-outline" href="#contact">Get in Touch</a>
+<header id="hero" class="hero-embedded" aria-labelledby="hero-title-main">
+  <div class="hero-bg-system" aria-hidden="true">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-scan"></div>
+
+    <svg class="hero-pcb-svg" viewBox="0 0 1400 860" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <filter id="traceGlow" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        <linearGradient id="traceGradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.1" />
+          <stop offset="45%" stop-color="#00e5ff" stop-opacity="0.85" />
+          <stop offset="100%" stop-color="#7c6dfa" stop-opacity="0.55" />
+        </linearGradient>
+        <path id="routeA" d="M30 160 H260 Q310 160 310 210 V330 H520 Q580 330 580 390 V520 H840 Q900 520 900 590 V760 H1260" />
+        <path id="routeB" d="M1180 110 H930 Q875 110 875 165 V250 H680 Q625 250 625 305 V420 H430 Q375 420 375 475 V620 H115" />
+        <path id="routeC" d="M140 710 H320 V610 H500 V495 H720 V360 H910 V250 H1320" />
+        <path id="routeD" d="M1240 680 H1085 V575 H980 V460 H815 V345 H640 V230 H480 V130 H210" />
+      </defs>
+
+      <use href="#routeA" class="pcb-route route-one" />
+      <use href="#routeB" class="pcb-route route-two" />
+      <use href="#routeC" class="pcb-route route-three" />
+      <use href="#routeD" class="pcb-route route-four" />
+
+      <g class="pcb-nodes">
+        <circle cx="310" cy="330" r="5" /><circle cx="580" cy="520" r="5" /><circle cx="900" cy="590" r="5" />
+        <circle cx="875" cy="250" r="5" /><circle cx="625" cy="420" r="5" /><circle cx="375" cy="620" r="5" />
+        <circle cx="500" cy="495" r="5" /><circle cx="720" cy="360" r="5" /><circle cx="980" cy="460" r="5" />
+      </g>
+
+      <circle class="data-packet packet-a" r="5" filter="url(#traceGlow)">
+        <animateMotion dur="7.5s" repeatCount="indefinite" rotate="auto"><mpath href="#routeA" /></animateMotion>
+      </circle>
+      <circle class="data-packet packet-b" r="4" filter="url(#traceGlow)">
+        <animateMotion dur="9s" repeatCount="indefinite" rotate="auto"><mpath href="#routeB" /></animateMotion>
+      </circle>
+      <circle class="data-packet packet-c" r="4" filter="url(#traceGlow)">
+        <animateMotion dur="8.2s" repeatCount="indefinite" rotate="auto"><mpath href="#routeC" /></animateMotion>
+      </circle>
+      <circle class="data-packet packet-d" r="5" filter="url(#traceGlow)">
+        <animateMotion dur="10s" repeatCount="indefinite" rotate="auto"><mpath href="#routeD" /></animateMotion>
+      </circle>
+    </svg>
+
+    <svg class="logic-bg-svg" viewBox="0 0 1400 860" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="busRectGradient" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#00e5ff" stop-opacity="0" />
+          <stop offset="24%" stop-color="#00e5ff" stop-opacity="0.16" />
+          <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.72" />
+          <stop offset="76%" stop-color="#7c6dfa" stop-opacity="0.18" />
+          <stop offset="100%" stop-color="#7c6dfa" stop-opacity="0" />
+        </linearGradient>
+        <path id="logicA" d="M-50 250 H110 V206 H220 V292 H355 V250 H520 V214 H700 V250 H890 V190 H1050 V250 H1450" />
+        <path id="logicB" d="M1450 612 H1290 V570 H1165 V645 H1010 V612 H810 V660 H650 V612 H430 V560 H245 V612 H-50" />
+        <path id="logicC" d="M60 430 H180 V385 H320 V430 H480 V470 H650 V430 H830 V390 H1030 V430 H1350" />
+      </defs>
+
+      <rect class="microchip-outline" x="1015" y="132" width="220" height="128" rx="18" />
+      <rect class="microchip-outline" x="110" y="610" width="240" height="115" rx="18" />
+
+      <use href="#logicA" class="logic-track track-one" />
+      <use href="#logicB" class="logic-track track-two" />
+      <use href="#logicC" class="logic-track track-three" />
+
+      <rect class="bus-rect" width="130" height="4">
+        <animateMotion dur="8.8s" repeatCount="indefinite" rotate="auto"><mpath href="#logicA" /></animateMotion>
+      </rect>
+      <rect class="bus-rect secondary" width="110" height="3">
+        <animateMotion dur="10.6s" repeatCount="indefinite" rotate="auto"><mpath href="#logicB" /></animateMotion>
+      </rect>
+      <rect class="bus-rect tertiary" width="95" height="3">
+        <animateMotion dur="12s" repeatCount="indefinite" rotate="auto"><mpath href="#logicC" /></animateMotion>
+      </rect>
+
+      <g class="smd-field">
+        <rect x="1045" y="160" width="18" height="7" rx="2"/><rect x="1075" y="160" width="18" height="7" rx="2"/><rect x="1105" y="160" width="18" height="7" rx="2"/><rect x="1135" y="160" width="18" height="7" rx="2"/>
+        <rect x="1045" y="222" width="18" height="7" rx="2"/><rect x="1075" y="222" width="18" height="7" rx="2"/><rect x="1105" y="222" width="18" height="7" rx="2"/><rect x="1135" y="222" width="18" height="7" rx="2"/>
+        <rect x="126" y="640" width="16" height="6" rx="2"/><rect x="154" y="640" width="16" height="6" rx="2"/><rect x="182" y="640" width="16" height="6" rx="2"/><rect x="210" y="640" width="16" height="6" rx="2"/>
+        <rect x="126" y="688" width="16" height="6" rx="2"/><rect x="154" y="688" width="16" height="6" rx="2"/><rect x="182" y="688" width="16" height="6" rx="2"/><rect x="210" y="688" width="16" height="6" rx="2"/>
+      </g>
+      <g class="corner-pads">
+        <rect x="72" y="92" width="78" height="3" rx="1.5"/><rect x="72" y="112" width="46" height="3" rx="1.5"/>
+        <rect x="1212" y="742" width="86" height="3" rx="1.5"/><rect x="1252" y="762" width="46" height="3" rx="1.5"/>
+      </g>
+    </svg>
+
+
+    <div class="floating-module module-a"><span>STM32</span><small>MCU CORE</small></div>
+    <div class="floating-module module-b"><span>CAN</span><small>BUS LINK</small></div>
+    <div class="floating-module module-c"><span>ADC</span><small>SENSOR IO</small></div>
+    <div class="floating-module module-d"><span>RF</span><small>LINK BUDGET</small></div>
+  </div>
+
+  <div class="hero-inner-embedded">
+    <div class="hero-copy-panel" data-hero-card>
+      <div class="hero-status-pill">
+        <span class="status-led"></span>
+        Embedded Hardware · PCB Design · Space Electronics
+      </div>
+
+      <h1 id="hero-title-main" class="hero-name-embedded" aria-label="Abdullah Basit">
+        <span class="name-row name-row-top" data-text="Abdullah">Abdullah</span>
+        <span class="name-row name-row-bottom" data-text="Basit">Basit</span>
+      </h1>
+
+      <p class="hero-engineer-line">
+        M1 Electrical Engineering · Université Grenoble Alpes
+      </p>
+
+      <p class="hero-copy-text">
+        I design reliable embedded hardware, mixed-signal PCBs, STM32 interfaces, sensor acquisition boards, and satellite-oriented electronics from schematic to validation.
+      </p>
+
+      <div class="hero-actions-embedded">
+        <a class="hero-btn hero-btn-primary magnetic-hero" href="#pcb-design">
+          <span>Explore PCB Work</span>
+          <b>↗</b>
+        </a>
+        <a class="hero-btn hero-btn-ghost magnetic-hero" href="#contact">
+          <span>Contact Me</span>
+          <b>→</b>
+        </a>
+      </div>
+
+      <div class="hero-skill-strip" aria-label="Core engineering skills">
+        <span>Altium</span>
+        <span>STM32</span>
+        <span>CAN</span>
+        <span>SPI / I2C</span>
+        <span>ADS</span>
+        <span>Cadence</span>
+        <span>Signal Integrity</span>
+      </div>
     </div>
-    <div class="hero-tags">
-      <span class="tag">PCB Design</span>
-      <span class="tag">Altium Designer</span>
-      <span class="tag">STM32</span>
-      <span class="tag">Cadence Virtuoso</span>
-      <span class="tag">ADS Simulation</span>
-      <span class="tag">CAN · LoRa</span>
-      <span class="tag">Signal Integrity</span>
-      <span class="tag">RF Electronics</span>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-      SCROLL TO EXPLORE
+
+    <div class="hero-board-panel" data-hero-card aria-label="Animated embedded PCB visual">
+      <div class="board-window-top">
+        <div class="window-dots"><i></i><i></i><i></i></div>
+        <span>LIVE BOARD VIEW</span>
+        <strong>REV-A</strong>
+      </div>
+
+      <div class="embedded-board-visual">
+        <div class="board-grid-mini"></div>
+        <div class="main-chip">
+          <div class="chip-label">AB MCU</div>
+          <div class="chip-core">STM32</div>
+          <span class="pin p1"></span><span class="pin p2"></span><span class="pin p3"></span><span class="pin p4"></span>
+          <span class="pin p5"></span><span class="pin p6"></span><span class="pin p7"></span><span class="pin p8"></span>
+          <span class="pin p9"></span><span class="pin p10"></span><span class="pin p11"></span><span class="pin p12"></span>
+        </div>
+
+        <span class="board-trace trace-1"></span>
+        <span class="board-trace trace-2"></span>
+        <span class="board-trace trace-3"></span>
+        <span class="board-trace trace-4"></span>
+        <span class="board-trace trace-5"></span>
+        <span class="board-trace trace-6"></span>
+
+        <div class="peripheral-card peripheral-a"><b>ADC</b><small>24-bit</small></div>
+        <div class="peripheral-card peripheral-b"><b>CAN</b><small>Transceiver</small></div>
+        <div class="peripheral-card peripheral-c"><b>PMIC</b><small>3.3 V Rail</small></div>
+        <div class="peripheral-card peripheral-d"><b>LoRa</b><small>Telemetry</small></div>
+
+        <div class="signal-pill bus-i2c">I2C</div>
+        <div class="signal-pill bus-spi">SPI</div>
+        <div class="signal-pill bus-uart">UART</div>
+        <div class="signal-pill bus-can">CAN</div>
+      </div>
+
+      <div class="board-metrics">
+        <div><strong>12+</strong><span>PCB Projects</span></div>
+        <div><strong>4L</strong><span>Mixed Signal</span></div>
+        <div><strong>2027</strong><span>M2 Internship</span></div>
+      </div>
     </div>
   </div>
 
-  <div class="hero-stats">
-    <div class="stat-item">
-      <div class="stat-num">1.5</div>
-      <div class="stat-label">Years Experience</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">12+</div>
-      <div class="stat-label">PCB Projects</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">5+</div>
-      <div class="stat-label">Tools Mastered</div>
-    </div>
-  </div>
-</div>
+  <a class="hero-scroll-embedded" href="#experience" aria-label="Scroll to experience">
+    <span></span>
+    Scroll to explore
+  </a>
+</header>
 
 <!-- EXPERIENCE -->
 <section id="experience">
@@ -4011,6 +5226,57 @@ window.addEventListener('DOMContentLoaded', initInteractiveToolStack);
 window.addEventListener('load', () => fitSkillTextToCards(document));
 window.addEventListener('resize', () => fitSkillTextToCards(document));
 
+
+
+/* ===================== EMBEDDED HERO INTERACTION ===================== */
+function initEmbeddedHero() {
+  const hero = document.querySelector('#hero.hero-embedded');
+  if (!hero) return;
+
+  hero.addEventListener('pointermove', e => {
+    const rect = hero.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    hero.style.setProperty('--mx', x.toFixed(2) + '%');
+    hero.style.setProperty('--my', y.toFixed(2) + '%');
+  });
+
+  hero.querySelectorAll('[data-hero-card]').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      const px = (x / r.width - 0.5) * 2;
+      const py = (y / r.height - 0.5) * 2;
+      card.style.transform = `perspective(1200px) rotateX(${-py * 4.5}deg) rotateY(${px * 5.5}deg) translateY(-6px)`;
+    });
+
+    card.addEventListener('pointerleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  hero.querySelectorAll('.magnetic-hero').forEach(btn => {
+    btn.addEventListener('pointermove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      const px = (x / r.width - 0.5) * 2;
+      const py = (y / r.height - 0.5) * 2;
+      btn.style.setProperty('--btn-x', `${x}px`);
+      btn.style.setProperty('--btn-y', `${y}px`);
+      btn.style.transform = `translate(${px * 7}px, ${py * 5}px) translateY(-5px)`;
+    });
+
+    btn.addEventListener('pointerleave', () => {
+      btn.style.transform = '';
+      btn.style.removeProperty('--btn-x');
+      btn.style.removeProperty('--btn-y');
+    });
+  });
+}
+
+window.addEventListener('DOMContentLoaded', initEmbeddedHero);
 
 </script>
 </body>
