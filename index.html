@@ -4204,6 +4204,197 @@ article {
   }
 }
 
+
+/* =====================================================
+   FINAL MOBILE + CURRENT BADGE PATCH
+   Keeps the same content/design, only fixes spacing/phone layout.
+===================================================== */
+
+/* Desktop/tablet: reserve space so CURRENT never sits on the date */
+.exp-card.current .exp-meta {
+  padding-right: 132px !important;
+}
+
+.exp-card.current .exp-date {
+  white-space: nowrap !important;
+}
+
+/* Touch devices: restore normal cursor and remove desktop-only cursor layers */
+@media (hover: none), (pointer: coarse) {
+  body,
+  a,
+  button,
+  .exp-card,
+  .edu-card,
+  .proj-card,
+  .report-card,
+  .skill-logo-card,
+  .skill-filter-btn,
+  .tab-btn,
+  .pcb-board-btn,
+  .pcb-toggle-btn,
+  .convert-btn {
+    cursor: auto !important;
+  }
+
+  .cursor,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
+/* Main mobile correction */
+@media (max-width: 760px) {
+  html,
+  body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Put CURRENT on its own safe line on mobile */
+  .exp-card.current {
+    padding-top: 58px !important;
+  }
+
+  .exp-card.current::after {
+    top: 20px !important;
+    left: 20px !important;
+    right: auto !important;
+    bottom: auto !important;
+    z-index: 3 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    width: fit-content !important;
+    max-width: calc(100% - 40px) !important;
+    white-space: nowrap !important;
+  }
+
+  .exp-card.current .exp-meta {
+    padding-right: 0 !important;
+  }
+
+  .exp-card.current .exp-date,
+  .exp-date {
+    white-space: normal !important;
+    text-align: left !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  /* Better phone layout without changing content */
+  section {
+    max-width: 100% !important;
+  }
+
+  .section-title {
+    font-size: clamp(30px, 9vw, 42px) !important;
+    line-height: 1.05 !important;
+  }
+
+  .section-header {
+    gap: 12px !important;
+    margin-bottom: 34px !important;
+  }
+
+  .exp-card,
+  .edu-card,
+  .proj-card,
+  .report-card {
+    width: 100% !important;
+  }
+
+  .exp-meta,
+  .proj-header {
+    width: 100% !important;
+  }
+
+  .hero-cta,
+  .hero-actions-embedded {
+    width: 100% !important;
+  }
+
+  .btn-primary,
+  .btn-outline,
+  .hero-btn {
+    text-align: center !important;
+  }
+
+  /* Make skills definitely visible and usable on mobile */
+  #skills,
+  #skills .skill-stack-panel,
+  #skills .skill-card-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    visibility: visible !important;
+  }
+
+  #skills .skill-card-grid,
+  .skill-card-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  #skills .skill-logo-card,
+  .skill-logo-card {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #skills .skill-logo-face,
+  .skill-logo-face,
+  #skills .skill-logo-cube,
+  .skill-logo-cube {
+    transform: none !important;
+  }
+
+  #skills .skill-logo-title,
+  .skill-logo-title,
+  #skills .skill-logo-role,
+  .skill-logo-role {
+    word-break: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 520px) {
+  .exp-card.current {
+    padding-top: 56px !important;
+  }
+
+  .exp-card.current::after {
+    top: 18px !important;
+    left: 18px !important;
+    max-width: calc(100% - 36px) !important;
+  }
+
+  #skills .skill-card-grid,
+  .skill-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  #skills .skill-logo-card,
+  .skill-logo-card {
+    min-height: 172px !important;
+  }
+}
+
+/* Very narrow phones */
+@media (max-width: 360px) {
+  #skills .skill-card-grid,
+  .skill-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 </style>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
