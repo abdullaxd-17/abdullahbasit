@@ -4204,6 +4204,101 @@ article {
   }
 }
 
+
+
+/* =========================================================
+   FINAL MOBILE FIX V2 — CURRENT badge + skills visibility
+   Content unchanged. Only responsive layout/visibility fixes.
+   ========================================================= */
+
+/* Keep the CURRENT badge away from the date/PRESENT text on desktop too. */
+.exp-card.current .exp-meta {
+  padding-right: 118px !important;
+}
+
+.exp-card.current::after {
+  white-space: nowrap !important;
+  z-index: 3 !important;
+}
+
+/* Skills must always have a real layout after JS generates cards. */
+#skills,
+#skills .skill-stack-panel,
+#skills #skillFilterRow,
+#skills #skillCardGrid {
+  visibility: visible !important;
+}
+
+#skills #skillCardGrid {
+  display: grid !important;
+  min-height: 120px !important;
+}
+
+#skills #skillCardGrid .skill-logo-card:not(.is-hidden) {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* If mobile reveal animation does not trigger immediately, still show skills. */
+@media (max-width: 900px) {
+  #skills .skill-stack-panel.reveal,
+  #skills .skill-stack-panel {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .exp-card.current {
+    padding-top: 58px !important;
+  }
+
+  .exp-card.current .exp-meta {
+    padding-right: 0 !important;
+  }
+
+  .exp-card.current::after {
+    top: 18px !important;
+    left: 20px !important;
+    right: auto !important;
+  }
+
+  #skills #skillFilterRow {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  #skills #skillCardGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #skills #skillCardGrid .skill-logo-card {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    min-width: 0 !important;
+  }
+
+  #skills #skillCardGrid .skill-logo-face {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 420px) {
+  /* One column avoids tiny squeezed boxes on narrow phones, so skills are readable. */
+  #skills #skillCardGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 </style>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
@@ -5893,6 +5988,63 @@ function initEmbeddedHero() {
 }
 
 window.addEventListener('DOMContentLoaded', initEmbeddedHero);
+
+
+
+/* =========================================================
+   FINAL MOBILE FIX V2 — skills generated-card fallback
+   Ensures skills show on phones even if the first DOMContentLoaded
+   timing is missed or the reveal state has not triggered yet.
+   ========================================================= */
+(function ensureMobileSkillsVisible() {
+  function forceSkillsVisible() {
+    const skills = document.getElementById('skills');
+    const panel = skills ? skills.querySelector('.skill-stack-panel') : null;
+    const filters = document.getElementById('skillFilterRow');
+    const grid = document.getElementById('skillCardGrid');
+
+    if (panel) panel.classList.add('visible');
+
+    if (grid && grid.children.length === 0 && typeof initInteractiveToolStack === 'function') {
+      try { initInteractiveToolStack(); } catch (e) { /* keep page alive */ }
+    }
+
+    if (filters) {
+      filters.style.display = 'flex';
+      filters.style.visibility = 'visible';
+      filters.style.opacity = '1';
+    }
+
+    if (grid) {
+      grid.style.display = 'grid';
+      grid.style.visibility = 'visible';
+      grid.style.opacity = '1';
+      grid.style.transform = 'none';
+      grid.querySelectorAll('[data-skill-card]').forEach(card => {
+        if (!card.classList.contains('is-hidden')) {
+          card.style.display = 'flex';
+          card.style.visibility = 'visible';
+          card.style.opacity = '1';
+          card.style.transform = '';
+        }
+      });
+    }
+
+    if (typeof fitSkillTextToCards === 'function') {
+      try { fitSkillTextToCards(document); } catch (e) { /* keep page alive */ }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', forceSkillsVisible);
+  } else {
+    forceSkillsVisible();
+  }
+  window.addEventListener('load', forceSkillsVisible);
+  window.addEventListener('resize', forceSkillsVisible);
+  setTimeout(forceSkillsVisible, 300);
+  setTimeout(forceSkillsVisible, 1000);
+})();
 
 </script>
 </body>
