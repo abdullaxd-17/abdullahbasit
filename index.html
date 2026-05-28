@@ -4503,6 +4503,279 @@ article {
     }
   }
 
+
+/* =====================================================
+   ABSOLUTE FINAL MOBILE FIX — original logos preserved
+   This block is intentionally last so it overrides older mobile patches.
+===================================================== */
+
+/* Reliable visibility on phones: avoid reveal sections getting stuck hidden. */
+@media (max-width: 900px), (hover: none), (pointer: coarse) {
+  html,
+  body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  body {
+    cursor: auto !important;
+    touch-action: pan-y;
+  }
+
+  .cursor,
+  .cursor-ring {
+    display: none !important;
+  }
+
+  .reveal,
+  .reveal.visible,
+  #skills,
+  #skills .section-header,
+  #skills .skill-stack-panel,
+  #skills .skill-card-grid {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  section,
+  #hero,
+  #hero.hero-embedded,
+  .hero-inner-embedded,
+  .hero-copy-panel,
+  .hero-board-panel,
+  .skill-stack-panel,
+  .skill-card-grid,
+  .skill-logo-card {
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .hero-inner-embedded {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .name-row,
+  .hero-name-embedded {
+    max-width: 100% !important;
+    overflow-wrap: normal !important;
+  }
+
+  .skill-stack-panel {
+    padding: 18px !important;
+    overflow: hidden !important;
+    border-radius: 22px;
+  }
+
+  .skill-filter-row {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 0 0 12px !important;
+    margin: 0 0 14px !important;
+    background:
+      linear-gradient(180deg, rgba(13,16,24,0.98), rgba(13,16,24,0.84));
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .skill-filter-row::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .skill-filter-btn {
+    flex: 0 0 auto !important;
+    cursor: pointer !important;
+  }
+
+  /* Skills become an internal scroll area so the section does not eat the whole phone page. */
+  #skills .skill-card-grid,
+  .skill-card-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    max-height: min(62vh, 560px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding-right: 3px !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  #skills .skill-card-grid::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #skills .skill-card-grid::-webkit-scrollbar-thumb {
+    background: rgba(0,229,255,0.55);
+    border-radius: 999px;
+  }
+
+  #skills .skill-logo-card,
+  .skill-logo-card {
+    display: flex !important;
+    min-height: 150px !important;
+    padding: 13px 8px 12px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  #skills .skill-logo-face,
+  .skill-logo-face {
+    width: 100% !important;
+    gap: 8px !important;
+    transform: none !important;
+  }
+
+  #skills .skill-logo-cube,
+  .skill-logo-cube {
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 16px !important;
+    display: grid !important;
+    place-items: center !important;
+    transform: none !important;
+  }
+
+  /* Preserve original logos on mobile. Do NOT replace them with fallback marks. */
+  #skills .skill-logo-cube.has-logo:not(.logo-fallback-active) > img,
+  .skill-logo-cube.has-logo:not(.logo-fallback-active) > img {
+    display: block !important;
+    width: 36px !important;
+    height: 36px !important;
+    max-width: 36px !important;
+    max-height: 36px !important;
+    object-fit: contain !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 12 !important;
+  }
+
+  #skills .skill-logo-cube.has-devicon:not(.logo-fallback-active) > i[class*="devicon-"],
+  .skill-logo-cube.has-devicon:not(.logo-fallback-active) > i[class*="devicon-"] {
+    display: inline-block !important;
+    font-size: 36px !important;
+    line-height: 1 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 12 !important;
+  }
+
+  #skills .skill-logo-cube.has-logo.logo-loaded > .skill-logo-mark-backup,
+  #skills .skill-logo-cube.has-devicon.icon-loaded > .skill-logo-mark-backup,
+  .skill-logo-cube.has-logo.logo-loaded > .skill-logo-mark-backup,
+  .skill-logo-cube.has-devicon.icon-loaded > .skill-logo-mark-backup {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  #skills .skill-logo-cube.logo-fallback-active > .skill-logo-mark-backup,
+  .skill-logo-cube.logo-fallback-active > .skill-logo-mark-backup {
+    display: grid !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  #skills .skill-logo-title,
+  .skill-logo-title {
+    min-height: 34px !important;
+    height: 34px !important;
+    max-height: 34px !important;
+    font-size: 10.8px !important;
+    line-height: 1.08 !important;
+    overflow: hidden !important;
+  }
+
+  #skills .skill-logo-role,
+  .skill-logo-role {
+    min-height: 26px !important;
+    height: 26px !important;
+    max-height: 26px !important;
+    font-size: 6.7px !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0.32px !important;
+    overflow: hidden !important;
+  }
+
+  #skills .skill-category-label,
+  .skill-category-label {
+    font-size: 7.4px !important;
+    letter-spacing: 0.9px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  #skills .skill-card-grid,
+  .skill-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    max-height: 60vh !important;
+  }
+
+  #skills .skill-logo-card,
+  .skill-logo-card {
+    min-height: 142px !important;
+  }
+
+  #skills .skill-logo-cube,
+  .skill-logo-cube {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  #skills .skill-logo-cube.has-logo:not(.logo-fallback-active) > img,
+  .skill-logo-cube.has-logo:not(.logo-fallback-active) > img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  #skills .skill-logo-cube.has-devicon:not(.logo-fallback-active) > i[class*="devicon-"],
+  .skill-logo-cube.has-devicon:not(.logo-fallback-active) > i[class*="devicon-"] {
+    font-size: 32px !important;
+  }
+
+  .hero-copy-panel,
+  .hero-board-panel {
+    padding: 18px !important;
+  }
+}
+
+@media (max-width: 340px) {
+  #skills .skill-card-grid,
+  .skill-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+
+  /* MOBILE FILTER PATCH: keep category filtering working after mobile visibility fix.
+     The mobile rule above sets .skill-logo-card { display:flex !important; },
+     so hidden filtered cards need a stronger selector. */
+  #skills .skill-logo-card.is-hidden,
+  #skills [data-skill-card].is-hidden,
+  .skill-card-grid .skill-logo-card.is-hidden,
+  .skill-card-grid [data-skill-card].is-hidden {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
 </style>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
@@ -5966,7 +6239,7 @@ function skillLogoHtml(tool) {
     cubeClass += ' has-logo';
     logoContent = `
       <span class="skill-logo-mark-backup" aria-hidden="true">${customMark}</span>
-      <img src="${escapeHtml(tool.logo)}" alt="${safeName} logo" loading="lazy">
+      <img src="${escapeHtml(tool.logo)}" alt="${safeName} logo" loading="eager" decoding="async">
     `;
   } else if (tool.icon) {
     cubeClass += ' has-devicon';
@@ -6141,34 +6414,74 @@ window.addEventListener('DOMContentLoaded', initInteractiveToolStack);
 window.addEventListener('load', () => fitSkillTextToCards(document));
 window.addEventListener('resize', () => fitSkillTextToCards(document));
 
-// Real mobile skills logo fix: on mobile/touch, keep the built-in fallback marks active.
+// Mobile skills safety: keep the original logo images/devicons active on phones.
+// Fallback marks are used only when a real logo actually fails to load.
 function forceMobileSkillLogoFallbacks() {
-  const isMobileSkillsView = window.matchMedia('(max-width: 900px), (hover: none), (pointer: coarse)').matches;
-  if (!isMobileSkillsView) return;
+  const skills = document.getElementById('skills');
+  if (!skills) return;
 
-  document.querySelectorAll('#skills .skill-logo-cube').forEach(cube => {
-    cube.classList.remove('logo-loaded', 'icon-loaded');
-    cube.classList.add('logo-fallback-active', 'mobile-safe-logo');
+  skills.querySelectorAll('.skill-logo-cube').forEach(cube => {
+    cube.classList.remove('mobile-safe-logo');
+
+    cube.querySelectorAll('img, i[class*="devicon-"]').forEach(el => {
+      el.style.removeProperty('display');
+      el.style.removeProperty('opacity');
+      el.style.removeProperty('visibility');
+    });
 
     const backup = cube.querySelector('.skill-logo-mark-backup');
     if (backup) {
-      backup.style.setProperty('display', 'grid', 'important');
-      backup.style.setProperty('opacity', '1', 'important');
-      backup.style.setProperty('visibility', 'visible', 'important');
+      backup.style.removeProperty('display');
+      backup.style.removeProperty('opacity');
+      backup.style.removeProperty('visibility');
+      backup.style.removeProperty('position');
+      backup.style.removeProperty('inset');
+      backup.style.removeProperty('z-index');
     }
 
-    cube.querySelectorAll('img, i[class*="devicon-"]').forEach(el => {
-      el.style.setProperty('display', 'none', 'important');
-      el.style.setProperty('opacity', '0', 'important');
-      el.style.setProperty('visibility', 'hidden', 'important');
-    });
+    const img = cube.querySelector('img');
+    const icon = cube.querySelector('i[class*="devicon-"]');
+
+    if (img) {
+      if (img.complete && img.naturalWidth > 0) {
+        cube.classList.remove('logo-fallback-active');
+        cube.classList.add('logo-loaded');
+      }
+    } else if (icon) {
+      cube.classList.remove('logo-fallback-active');
+      cube.classList.add('icon-loaded');
+    }
   });
+
+  if (typeof wireSkillLogos === 'function') {
+    wireSkillLogos(skills);
+  }
+
+  if (typeof fitSkillTextToCards === 'function') {
+    requestAnimationFrame(() => fitSkillTextToCards(skills));
+  }
 }
 
-window.addEventListener('DOMContentLoaded', () => requestAnimationFrame(forceMobileSkillLogoFallbacks));
-window.addEventListener('load', forceMobileSkillLogoFallbacks);
-window.addEventListener('resize', forceMobileSkillLogoFallbacks);
-window.addEventListener('orientationchange', forceMobileSkillLogoFallbacks);
+function ensureMobileSkillsVisible() {
+  const isMobileSkillsView = window.matchMedia('(max-width: 900px), (hover: none), (pointer: coarse)').matches;
+  if (!isMobileSkillsView) return;
+
+  document.querySelectorAll('.reveal, #skills .skill-stack-panel, #skills .skill-card-grid').forEach(el => {
+    el.classList.add('visible');
+  });
+
+  const grid = document.getElementById('skillCardGrid');
+  if (grid && !grid.children.length && typeof initInteractiveToolStack === 'function') {
+    initInteractiveToolStack();
+  }
+
+  forceMobileSkillLogoFallbacks();
+}
+
+window.addEventListener('DOMContentLoaded', () => requestAnimationFrame(ensureMobileSkillsVisible));
+window.addEventListener('load', ensureMobileSkillsVisible);
+window.addEventListener('resize', ensureMobileSkillsVisible);
+window.addEventListener('orientationchange', ensureMobileSkillsVisible);
 
 
 
@@ -6222,6 +6535,48 @@ function initEmbeddedHero() {
 }
 
 window.addEventListener('DOMContentLoaded', initEmbeddedHero);
+
+
+
+
+// Mobile/filter robustness patch: delegated listener keeps filters working even after layout fixes.
+(function patchSkillFilterButtons(){
+  function run(category) {
+    if (!category) category = 'all';
+    if (typeof applySkillFilter === 'function') {
+      applySkillFilter(category);
+    } else {
+      document.querySelectorAll('.skill-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.category === category);
+      });
+      document.querySelectorAll('#skills [data-skill-card]').forEach(card => {
+        const show = category === 'all' || card.dataset.category === category;
+        card.classList.toggle('is-hidden', !show);
+        card.style.display = show ? '' : 'none';
+      });
+    }
+    const grid = document.getElementById('skillCardGrid');
+    if (grid) {
+      grid.scrollTop = 0;
+      if (typeof fitSkillTextToCards === 'function') {
+        requestAnimationFrame(() => fitSkillTextToCards(grid));
+      }
+    }
+  }
+
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest && e.target.closest('.skill-filter-btn');
+    if (!btn) return;
+    e.preventDefault();
+    run(btn.dataset.category || 'all');
+  }, true);
+
+  window.addEventListener('DOMContentLoaded', function() {
+    const active = document.querySelector('.skill-filter-btn.active');
+    run(active ? active.dataset.category : 'all');
+  });
+})();
+
 
 </script>
 </body>
