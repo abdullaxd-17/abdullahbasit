@@ -580,6 +580,53 @@
     color: var(--accent3);
   }
 
+
+  /* EMBEDDED AI PROJECT LINK CARD */
+  .proj-card.project-link-card {
+    cursor: pointer;
+  }
+
+  .proj-card.project-link-card:focus {
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  .proj-bullets {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin-top: 2px;
+  }
+
+  .proj-bullets li {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.75;
+    padding-left: 22px;
+    position: relative;
+  }
+
+  .proj-bullets li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+  }
+
+  .proj-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .project-live-link {
+    width: fit-content;
+    position: relative;
+    z-index: 2;
+  }
+
   /* SKILLS — 3D LOGO SHOWCASE */
   .skills-overview {
     display: grid;
@@ -5136,12 +5183,48 @@ article {
 
   <div class="tabs-nav reveal">
     <button class="tab-btn active" onclick="switchTab('embedded', event)"><span>⚙ Embedded Systems</span></button>
+    <button class="tab-btn" onclick="switchTab('embedded-ai', event)"><span>🧠 Embedded AI</span></button>
     <button class="tab-btn" onclick="switchTab('pcb', event)"><span>◈ PCB & Hardware</span></button>
     <button class="tab-btn" onclick="switchTab('rf', event)"><span>〜 RF & Analog</span></button>
     <button class="tab-btn" onclick="switchTab('power', event)"><span>⚡ Power Electronics</span></button>
     <button class="tab-btn" onclick="switchTab('fpga', event)"><span>▣ FPGA & Digital</span></button>
     <button class="tab-btn" onclick="switchTab('robotics', event)"><span>◎ Robotics & Control</span></button>
     <button class="tab-btn" onclick="switchTab('bci', event)"><span>◈ BCI & Biomedical</span></button>
+  </div>
+
+  <!-- EMBEDDED AI -->
+  <div class="tab-content" id="tab-embedded-ai">
+    <div class="proj-card project-link-card reveal" role="link" tabindex="0"
+         onclick="window.open('https://abdullaxd-17.github.io/Predictive_Maintenance_Embedded_AI/', '_blank')"
+         onkeydown="if(event.key === 'Enter') window.open('https://abdullaxd-17.github.io/Predictive_Maintenance_Embedded_AI/', '_blank')">
+      <div class="proj-header">
+        <div class="proj-title">Predictive Maintenance Embedded AI — STM32 TinyML Motor Fault Detection</div>
+        <div class="proj-year">2026 · LIVE DEMO</div>
+      </div>
+
+      <div class="proj-desc">
+        <ul class="proj-bullets">
+          <li>Built an end-to-end predictive maintenance workflow where PC/Jupyter generates motor vibration windows and sends <strong>128 × float32</strong> samples to STM32 over UART.</li>
+          <li>Deployed an embedded TinyML classifier on <strong>STM32L432KC</strong> using TensorFlow Lite / STM32Cube.AI for five motor conditions: Normal, Bearing Fault, Imbalance, Loose Mounting, and Overload.</li>
+          <li>Created an interactive web dashboard with system flowchart, class selector, confidence graph, live waveform, accuracy graph, confusion matrix, and fixed output video demonstration.</li>
+        </ul>
+      </div>
+
+      <div class="proj-tags">
+        <span class="proj-tag">STM32L432KC</span>
+        <span class="proj-tag purple">TinyML</span>
+        <span class="proj-tag">UART</span>
+        <span class="proj-tag">STM32Cube.AI</span>
+        <span class="proj-tag orange">Predictive Maintenance</span>
+        <span class="proj-tag purple">Embedded AI</span>
+      </div>
+
+      <div class="proj-actions">
+        <a class="btn-outline project-live-link" href="https://abdullaxd-17.github.io/Predictive_Maintenance_Embedded_AI/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+          View Interactive Website
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- EMBEDDED -->
