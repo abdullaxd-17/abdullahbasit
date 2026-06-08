@@ -5550,6 +5550,7 @@ article {
     <button class="pcb-board-btn" id="boardBtnSom" onclick="switchPCBBoard('som')">LA_SOM_01-2K25</button>
     <button class="pcb-board-btn" id="boardBtnRgbOled" onclick="switchPCBBoard('rgb_oled')">RGB_OLED</button>
     <button class="pcb-board-btn" id="boardBtnRsws" onclick="switchPCBBoard('rsws')">RSWS_BRD</button>
+    <button class="pcb-board-btn" id="boardBtnSolarPanel" onclick="switchPCBBoard('solar_panel')">Solar Panel</button>
   </div>
 
   <!-- Toggle buttons -->
@@ -5888,6 +5889,17 @@ const PCB_BOARDS = {
     modelLabel: '⬡ RSWS_BRD.GLB — INTERACTIVE 3D MODEL',
     footerText: '',
     alt: 'Interactive 3D model of RSWS_BRD designed by Abdullah Basit'
+  },
+  solar_panel: {
+    buttonId: 'boardBtnSolarPanel',
+    name: 'Solar Panel',
+    views: ['2d', '3d'],
+    image: 'Solar_Panel.png',
+    model: 'Solar_Panel.glb',
+    layoutLabel: '◈ SOLAR PANEL — 2D PCB LAYOUT VIEW',
+    modelLabel: '⬡ SOLAR PANEL.GLB — INTERACTIVE 3D MODEL',
+    footerText: '2D PCB Layout · Altium Designer Export · Solar Panel Board Preview',
+    alt: 'Solar Panel 2D PCB layout and interactive 3D model designed by Abdullah Basit'
   }
 };
 
