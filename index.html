@@ -984,7 +984,7 @@ h1 .ln:nth-child(2) span{-webkit-text-stroke:0;color:var(--hi)}
     <div class="lab-stage" id="labStage">
       <span class="crop" aria-hidden="true"></span>
       <div class="lab-loading" id="labLoading" hidden>SWITCHING VIEW…</div>
-      <img id="lab2d" alt="" loading="lazy" hidden>
+      <img id="lab2d" alt="" hidden>
       <model-viewer id="lab3d" camera-controls auto-rotate auto-rotate-delay="1200" rotation-per-second="22deg" interaction-prompt="none" shadow-intensity="1" exposure="1.05" hidden></model-viewer>
       <div class="lab-msg" id="labMsg" hidden>
         <b>3D FILE NOT LOADED</b>
@@ -1426,13 +1426,16 @@ function setView(view,announceLoad=true){
     $('#labHint').textContent='◈ Fabrication-style layout export · pinch or ctrl+scroll to zoom the page';
   }else{
     lab2d.hidden=true;lab3d.hidden=false;
-    lab3d.addEventListener('load',()=>{labLoad.hidden=true},{once:true});
+    let glbDone=false;
+    const hideGlbOverlay=()=>{if(!glbDone){glbDone=true;labLoad.hidden=true;}};
+    lab3d.addEventListener('load',hideGlbOverlay,{once:true});
     lab3d.addEventListener('error',()=>{
-      labLoad.hidden=true;
+      hideGlbOverlay();
       lab3d.hidden=true;labMsg.hidden=false;
       labMsg.querySelector('b').textContent='3D FILE NOT LOADED';
       labMsg.querySelector('span').textContent=`Make sure ${b.model} is uploaded in the same GitHub repo folder as index.html.`;
     },{once:true});
+    setTimeout(hideGlbOverlay,15000);
     lab3d.setAttribute('alt',b.alt);lab3d.setAttribute('src',b.model);
     $('#labFile').textContent=b.model||'—';$('#labFmt').textContent='GLB';
     $('#labHint').textContent='🖱 Drag to rotate · Scroll to zoom · Right-drag to pan';
