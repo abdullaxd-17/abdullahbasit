@@ -1403,9 +1403,17 @@ function setView(view,announceLoad=true){
   $('#btn2d').disabled=!b.views.includes('2d');
   $('#btn3d').disabled=!b.views.includes('3d');
   labMsg.hidden=true;
+
+  /* always fully hide BOTH first, then show only the one we need */
+  lab2d.hidden=true;
+  lab2d.src='';
+  lab3d.hidden=true;
+  lab3d.removeAttribute('src'); /* stops model-viewer rendering */
+
   if(announceLoad) labLoad.hidden=false;
+
   if(view==='2d'){
-    lab3d.hidden=true;lab2d.hidden=false;
+    lab2d.hidden=false;
     const sources=[b.image,...(b.imageFallbacks||[])];let i=0;
     let imgDone=false;
     const hideImgOverlay=()=>{if(!imgDone){imgDone=true;labLoad.hidden=true;}};
@@ -1422,14 +1430,12 @@ function setView(view,announceLoad=true){
     };
     lab2d.alt=b.alt;
     lab2d.src=sources[0];
-    /* cached images won't fire onload */
     if(lab2d.complete && lab2d.naturalWidth) hideImgOverlay();
-    /* safety: never stuck longer than 8s */
     setTimeout(hideImgOverlay,8000);
     $('#labFile').textContent=b.image||'—';$('#labFmt').textContent='PNG';
     $('#labHint').textContent='◈ Fabrication-style layout export · pinch or ctrl+scroll to zoom the page';
   }else{
-    lab2d.hidden=true;lab3d.hidden=false;
+    lab3d.hidden=false;
     let glbDone=false;
     const hideGlbOverlay=()=>{if(!glbDone){glbDone=true;labLoad.hidden=true;}};
     lab3d.addEventListener('load',hideGlbOverlay,{once:true});
@@ -1440,7 +1446,8 @@ function setView(view,announceLoad=true){
       labMsg.querySelector('span').textContent=`Make sure ${b.model} is uploaded in the same GitHub repo folder as index.html.`;
     },{once:true});
     setTimeout(hideGlbOverlay,15000);
-    lab3d.setAttribute('alt',b.alt);lab3d.setAttribute('src',b.model);
+    lab3d.setAttribute('alt',b.alt);
+    lab3d.setAttribute('src',b.model);
     $('#labFile').textContent=b.model||'—';$('#labFmt').textContent='GLB';
     $('#labHint').textContent='🖱 Drag to rotate · Scroll to zoom · Right-drag to pan';
   }
