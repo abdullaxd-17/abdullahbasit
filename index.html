@@ -697,6 +697,9 @@ h1 .ln:nth-child(2) span{-webkit-text-stroke:0;color:var(--hi)}
   transform:rotate(45deg) translate(2px,2px)}
 #toTop:hover{box-shadow:0 0 24px rgba(77,163,255,.45);border-color:var(--hi)}
 .btn-primary.copied{background:linear-gradient(135deg,#9AF0C8,var(--hi));color:var(--bg0)}
+
+/* restore native hidden semantics — author display rules must never override it */
+[hidden]{display:none !important}
 </style>
 </head>
 <body>
@@ -984,7 +987,7 @@ h1 .ln:nth-child(2) span{-webkit-text-stroke:0;color:var(--hi)}
     <div class="lab-stage" id="labStage">
       <span class="crop" aria-hidden="true"></span>
       <div class="lab-loading" id="labLoading" hidden>SWITCHING VIEW…</div>
-      <img id="lab2d" alt="" hidden>
+      <img id="lab2d" alt="" loading="lazy" hidden>
       <model-viewer id="lab3d" camera-controls auto-rotate auto-rotate-delay="1200" rotation-per-second="22deg" interaction-prompt="none" shadow-intensity="1" exposure="1.05" hidden></model-viewer>
       <div class="lab-msg" id="labMsg" hidden>
         <b>3D FILE NOT LOADED</b>
@@ -1187,7 +1190,7 @@ const PROJECTS = [
 const BOARDS = {
  thc:{name:'THC Board',views:['2d','3d'],image:'pcb_2d.png',model:'PCB1_csug.glb',
   foot:'2D PCB layout · Altium Designer export · THC Board preview',alt:'THC board 2D PCB layout view designed by Abdullah Basit'},
- som:{name:'LA_SOM_01-2K25',views:['2d','3d'],image:'som_test_board .png',imageFallbacks:['som_test_board.png'],model:'LA_SOM_01-2K25.glb',
+ som:{name:'LA_SOM_01-2K25',views:['2d','3d'],image:'som_test_board.png',imageFallbacks:['som_test_board .png'],model:'LA_SOM_01-2K25.glb',
   foot:'2D PCB layout · Altium Designer export · SOM Day Cam test board preview',alt:'LA SOM 01 2K25 2D PCB layout view designed by Abdullah Basit'},
  rgb_oled:{name:'RGB_OLED',views:['2d'],image:'rgb_oled.png',model:null,
   foot:'2D PCB layout · Altium Designer export · RGB_OLED board preview',alt:'RGB_OLED 2D PCB layout view designed by Abdullah Basit'},
@@ -1403,51 +1406,18 @@ function setView(view,announceLoad=true){
   $('#btn2d').disabled=!b.views.includes('2d');
   $('#btn3d').disabled=!b.views.includes('3d');
   labMsg.hidden=true;
-
-  /* always fully hide BOTH first, then show only the one we need */
-  lab2d.hidden=true;
-  lab2d.src='';
-  lab3d.hidden=true;
-  lab3d.removeAttribute('src'); /* stops model-viewer rendering */
-
-  if(announceLoad) labLoad.hidden=false;
-
+  if(announceLoad){labLoad.hidden=false;setTimeout(()=>labLoad.hidden=true,420)}
   if(view==='2d'){
-    lab2d.hidden=false;
+    lab3d.hidden=true;lab2d.hidden=false;
     const sources=[b.image,...(b.imageFallbacks||[])];let i=0;
-    let imgDone=false;
-    const hideImgOverlay=()=>{if(!imgDone){imgDone=true;labLoad.hidden=true;}};
-    lab2d.onload=hideImgOverlay;
-    lab2d.onerror=()=>{
-      i++;
-      if(i<sources.length){lab2d.src=sources[i];}
-      else{
-        hideImgOverlay();
-        lab2d.hidden=true;labMsg.hidden=false;
-        labMsg.querySelector('b').textContent='2D IMAGE NOT LOADED';
-        labMsg.querySelector('span').textContent=`Make sure ${b.image} is uploaded in the same GitHub repo folder as index.html.`;
-      }
-    };
-    lab2d.alt=b.alt;
-    lab2d.src=sources[0];
-    if(lab2d.complete && lab2d.naturalWidth) hideImgOverlay();
-    setTimeout(hideImgOverlay,8000);
+    lab2d.onerror=()=>{i++;if(i<sources.length){lab2d.src=sources[i]}else{lab2d.hidden=true;labMsg.hidden=false;labMsg.querySelector('b').textContent='2D IMAGE NOT LOADED';labMsg.querySelector('span').textContent=`Make sure ${b.image} is uploaded in the same GitHub repo folder as index.html.`}};
+    lab2d.alt=b.alt;lab2d.src=sources[0];
     $('#labFile').textContent=b.image||'—';$('#labFmt').textContent='PNG';
     $('#labHint').textContent='◈ Fabrication-style layout export · pinch or ctrl+scroll to zoom the page';
   }else{
-    lab3d.hidden=false;
-    let glbDone=false;
-    const hideGlbOverlay=()=>{if(!glbDone){glbDone=true;labLoad.hidden=true;}};
-    lab3d.addEventListener('load',hideGlbOverlay,{once:true});
-    lab3d.addEventListener('error',()=>{
-      hideGlbOverlay();
-      lab3d.hidden=true;labMsg.hidden=false;
-      labMsg.querySelector('b').textContent='3D FILE NOT LOADED';
-      labMsg.querySelector('span').textContent=`Make sure ${b.model} is uploaded in the same GitHub repo folder as index.html.`;
-    },{once:true});
-    setTimeout(hideGlbOverlay,15000);
-    lab3d.setAttribute('alt',b.alt);
-    lab3d.setAttribute('src',b.model);
+    lab2d.hidden=true;lab3d.hidden=false;
+    lab3d.onerror=()=>{lab3d.hidden=true;labMsg.hidden=false;labMsg.querySelector('b').textContent='3D FILE NOT LOADED';labMsg.querySelector('span').textContent=`Make sure ${b.model} is uploaded in the same GitHub repo folder as index.html.`};
+    lab3d.setAttribute('alt',b.alt);lab3d.setAttribute('src',b.model);
     $('#labFile').textContent=b.model||'—';$('#labFmt').textContent='GLB';
     $('#labHint').textContent='🖱 Drag to rotate · Scroll to zoom · Right-drag to pan';
   }
