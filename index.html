@@ -1187,7 +1187,7 @@ const PROJECTS = [
 const BOARDS = {
  thc:{name:'THC Board',views:['2d','3d'],image:'pcb_2d.png',model:'PCB1_csug.glb',
   foot:'2D PCB layout · Altium Designer export · THC Board preview',alt:'THC board 2D PCB layout view designed by Abdullah Basit'},
- som:{name:'LA_SOM_01-2K25',views:['2d','3d'],image:'som_test_board.png',imageFallbacks:['som_test_board .png'],model:'LA_SOM_01-2K25.glb',
+ som:{name:'LA_SOM_01-2K25',views:['2d','3d'],image:'som_test_board .png',imageFallbacks:['som_test_board.png'],model:'LA_SOM_01-2K25.glb',
   foot:'2D PCB layout · Altium Designer export · SOM Day Cam test board preview',alt:'LA SOM 01 2K25 2D PCB layout view designed by Abdullah Basit'},
  rgb_oled:{name:'RGB_OLED',views:['2d'],image:'rgb_oled.png',model:null,
   foot:'2D PCB layout · Altium Designer export · RGB_OLED board preview',alt:'RGB_OLED 2D PCB layout view designed by Abdullah Basit'},
@@ -1407,21 +1407,25 @@ function setView(view,announceLoad=true){
   if(view==='2d'){
     lab3d.hidden=true;lab2d.hidden=false;
     const sources=[b.image,...(b.imageFallbacks||[])];let i=0;
-    lab2d.onload=()=>{labLoad.hidden=true};
+    let imgDone=false;
+    const hideImgOverlay=()=>{if(!imgDone){imgDone=true;labLoad.hidden=true;}};
+    lab2d.onload=hideImgOverlay;
     lab2d.onerror=()=>{
       i++;
-      if(i<sources.length){lab2d.src=sources[i]}
+      if(i<sources.length){lab2d.src=sources[i];}
       else{
-        labLoad.hidden=true;
+        hideImgOverlay();
         lab2d.hidden=true;labMsg.hidden=false;
         labMsg.querySelector('b').textContent='2D IMAGE NOT LOADED';
         labMsg.querySelector('span').textContent=`Make sure ${b.image} is uploaded in the same GitHub repo folder as index.html.`;
       }
     };
     lab2d.alt=b.alt;
-    /* If already cached the browser won't fire onload — check complete */
     lab2d.src=sources[0];
-    if(lab2d.complete && lab2d.naturalWidth) labLoad.hidden=true;
+    /* cached images won't fire onload */
+    if(lab2d.complete && lab2d.naturalWidth) hideImgOverlay();
+    /* safety: never stuck longer than 8s */
+    setTimeout(hideImgOverlay,8000);
     $('#labFile').textContent=b.image||'—';$('#labFmt').textContent='PNG';
     $('#labHint').textContent='◈ Fabrication-style layout export · pinch or ctrl+scroll to zoom the page';
   }else{
