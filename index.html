@@ -1117,9 +1117,9 @@ const PROJECTS = [
   desc:'End-to-end predictive maintenance workflow: PC/Jupyter generates motor vibration windows and streams 128 × float32 samples to STM32 over UART. An embedded TinyML classifier on STM32L432KC (TensorFlow Lite / STM32Cube.AI) detects five motor conditions — Normal, Bearing Fault, Imbalance, Loose Mounting, Overload — with an interactive dashboard: flowchart, class selector, confidence and accuracy graphs, live waveform and confusion matrix.',
   tags:['STM32L432KC','TinyML','UART','STM32Cube.AI','Predictive Maintenance','Embedded AI']},
  {cat:'embedded',yr:'2026 · ONGOING',
-  title:'STM32-Based Satellite THC Board',
-  desc:'Temperature/Humidity/Control board for space-oriented electronics at Centre Spatial Universitaire de Grenoble. CAN communication between STM32 and a LoRa module for telemetry and ground-station communication; SPI and I2C for sensor and monitoring IC interfaces.',
-  tags:['STM32','CAN Bus','LoRa','SPI / I2C','Space Electronics']},
+  title:'STM32-Based Satellite THC Board & EPS Power Core — PC/104 Stack',
+  desc:'Temperature/Humidity/Control (THC) board and Electrical Power System (EPS) board for space-oriented electronics at Centre Spatial Universitaire de Grenoble. The two boards mate via a PC/104 header to form a single payload stack at 15.24 mm separation. CAN communication between STM32 and a LoRa module for telemetry; SPI and I2C for sensor and monitoring IC interfaces.',
+  tags:['STM32','CAN Bus','LoRa','SPI / I2C','PC/104 Stack','Space Electronics','EPS']},
  {cat:'embedded',yr:'2020–2024',
   title:'FreeRTOS Digital Watch & PWM Controller',
   desc:'FreeRTOS-based multi-tasking digital watch and PWM-controlled system with MQTT communication for IoT connectivity. Demonstrated real-time scheduling, interrupt handling, and peripheral management.',
@@ -1200,7 +1200,11 @@ const BOARDS = {
  rsws:{name:'RSWS_BRD',views:['3d'],image:null,model:'RSWS_BRD.glb',
   foot:'Interactive 3D model · RSWS_BRD',alt:'Interactive 3D model of RSWS_BRD designed by Abdullah Basit'},
  solar_panel:{name:'Solar Panel',views:['2d','3d'],image:'Solar_Panel.png',model:'Solar_Panel.glb',
-  foot:'2D PCB layout · Altium Designer export · Solar Panel board preview',alt:'Solar Panel 2D PCB layout and interactive 3D model designed by Abdullah Basit'}
+  foot:'2D PCB layout · Altium Designer export · Solar Panel board preview',alt:'Solar Panel 2D PCB layout and interactive 3D model designed by Abdullah Basit'},
+ eps:{name:'EPS Board',views:['2d','3d'],image:'eps_2d.png',model:'EPS_Board.glb',
+  foot:'2D PCB layout · Altium Designer export · EPS Power Core board preview',alt:'EPS Board 2D PCB layout and interactive 3D model designed by Abdullah Basit'},
+ eps_thc:{name:'EPS + THC Stack',views:['2d','3d'],image:'assembly_2d.png',model:'EPS_THC_Assembly.glb',
+  foot:'System Integration · EPS Power Core + THC Measurement Payload · PC/104 Stack · mated 15.24 mm',alt:'EPS and THC PC/104 stack assembly 2D integration diagram and interactive 3D model designed by Abdullah Basit'}
 };
 
 const SK_CATS = [
